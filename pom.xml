@@ -15,6 +15,9 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<!-- yarn 명령어들을 실행할 수 있게 해준다 -->
+		<node.version>v14.18.0</node.version>
+		<yarn.version>v1.22.17</yarn.version>
 	</properties>
 	<dependencies>
 <!--		<dependency>-->
@@ -53,6 +56,7 @@
 			<artifactId>flyway-core</artifactId>
 		</dependency>
 		<!-- datesource의 HikariConfig, HikariDateSource 추가용 -->
+		<!-- 커넥션 풀 라이브러리 설정 : 사용자가 몰리게 되면 커넥션 객체가 많이 필요한데 걔네를 미리 만들어놓고 쓰는것 -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
@@ -73,14 +77,99 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.github.eirslett</groupId>
+						<artifactId>frontend-maven-plugin</artifactId>
+						<version>1.10.4</version>
+						<configuration>
+							<!-- excution이 실행되는 경로-->
+							<workingDirectory>src/js</workingDirectory>
+						</configuration>
+						<executions>
+							<execution>
+								<id>install node</id>
+								<goals>
+									<goal>install-node-and-yarn</goal>
+								</goals>
+								<configuration>
+									<nodeVersion>${node.version}</nodeVersion>
+									<yarnVersion>${yarn.version}</yarnVersion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>yarn install</id>
+								<goals>
+									<goal>yarn</goal>
+								</goals>
+								<phase>generate-resources</phase>
+							</execution>
+							<execution>
+								<id>yarn test</id>
+								<goals>
+									<goal>yarn</goal>
+								</goals>
+								<phase>test</phase>
+								<configuration>
+									<!-- goal에 대한 argument-->
+									<arguments>test</arguments>
+									<environmentVariables>
+										<CI>true</CI>
+									</environmentVariables>
+								</configuration>
+							</execution>
+							<execution>
+								<id>yarn build</id>
+								<goals>
+									<goal>yarn</goal>
+								</goals>
+								<phase>compile</phase>
+								<configuration>
+									<arguments>build</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-resources</id>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${basedir}/target/classes/static</outputDirectory>
+									<resources>
+										<resource>
+											<directory>src/js/build</directory>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

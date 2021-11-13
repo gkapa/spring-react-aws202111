@@ -1,5 +1,6 @@
 application.yml
 application.properties
+**/resources/static/
 
 HELP.md
 target/
