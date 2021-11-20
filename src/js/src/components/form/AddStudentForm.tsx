@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Formik, validateYupSchema } from "formik";
-import { Input, Button, Tag } from "antd";
 import { IStudentForm, addNewStudnet } from "api/studentApi";
 
 const studentFormInitValues: Required<IStudentForm> = {
@@ -70,7 +69,7 @@ export default function fun(props: IProps) {
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
-            <Input
+            {/* <Input
               className="inputBox"
               name="firstName"
               onChange={handleChange}
@@ -109,7 +108,7 @@ export default function fun(props: IProps) {
             {errors.gender && touched.gender && <Tag className="errorTag">{errors.gender}</Tag>}
             <Button type="primary" htmlType="submit" onClick={() => submitForm()} disabled={isSubmitting}>
               Submit
-            </Button>
+            </Button> */}
           </form>
         )}
       </Formik>

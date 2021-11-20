@@ -1,19 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Button } from "antd";
 
 interface IProps {
   showModal: () => void;
 }
 
 export default function fun(props: IProps) {
-  return (
-    <Wrapper>
-      <Button type="primary" onClick={() => props.showModal()}>
-        Add new student +
-      </Button>
-    </Wrapper>
-  );
+  return <Wrapper>sdf</Wrapper>;
 }
 
 const Wrapper = styled.div`
