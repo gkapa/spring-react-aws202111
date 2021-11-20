@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Grid from "@mui/material/Grid";
-import { globalConsts } from "styles/global";
+import { globalConsts } from "styles/globalConsts";
 import { Link } from "react-router-dom";
 
 export default function fun() {
@@ -21,7 +21,9 @@ export default function fun() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             News
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button variant="contained" color="inherit" sx={{ background: "gray" }}>
+            ログイン
+          </Button>
           <IconButton
             size="large"
             edge="start"
