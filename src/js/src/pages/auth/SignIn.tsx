@@ -1,10 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import SignInForm from "components/form/SignInForm";
 
 export default function Fun() {
   return (
     <Box>
-      <h1>Hello, Wolrd!</h1>
+      <SignInForm></SignInForm>
     </Box>
   );
 }
