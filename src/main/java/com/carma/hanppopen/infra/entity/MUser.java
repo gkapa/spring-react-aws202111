@@ -31,6 +31,9 @@ public class MUser {
     private Integer loginFailCnt;
 
     @Column
+    private Integer status;
+
+    @Column
     private Integer role;
 
     @Column

@@ -10,9 +10,10 @@ import Box from "@mui/material/Box";
 import * as gb from "styles/globalConsts";
 
 import Home from "pages/home/Home";
-import Template from "pages/template/Template";
 import SignIn from "pages/auth/SignIn";
 import SignUp from "pages/auth/SignUp";
+import Regist from "pages/auth/Regist";
+import NotFound from "pages/notFound/NotFound";
 
 export default function App() {
   return (
@@ -22,10 +23,10 @@ export default function App() {
       <Box id="mainContent" sx={{ py: 2, mx: "auto", width: "100%", maxWidth: gb.theme.maxContentWidth }}>
         <Routes>
           <Route path="/" element={<Home></Home>} />
-          <Route path="/template" element={<Template></Template>} />
-          <Route path="/template" element={<Template></Template>} />
-          <Route path="/auth/signUp" element={<SignUp></SignUp>} />
-          <Route path="/auth/signIn" element={<SignIn></SignIn>} />
+          <Route path="/auth/signUp" element={<SignUp />} />
+          <Route path="/auth/signIn" element={<SignIn />} />
+          <Route path="/auth/regist" element={<Regist />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Box>
     </BrowserRouter>

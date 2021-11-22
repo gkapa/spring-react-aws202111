@@ -2,3 +2,7 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+a.add-link::after {
+    content: attr(href);
+}
