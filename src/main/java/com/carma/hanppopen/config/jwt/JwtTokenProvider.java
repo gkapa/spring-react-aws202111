@@ -27,6 +27,9 @@ public class JwtTokenProvider {
     @Value("${jwt.refresh-ms}")
     private long REFRESH_TOKEN_VALID_TIME;
 
+    @Value("${jwt.header-name}")
+    private String HEADER_NAME;
+
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -79,7 +82,7 @@ public class JwtTokenProvider {
 
     //Request의 Header에서 token 값 가져오기. "X-AUTH-TOKEN" : "TOKEN값"
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("X-AUTH-TOKEN");
+        return request.getHeader(HEADER_NAME);
     }
 
     //토큰의 유효성과 만료일자 확인

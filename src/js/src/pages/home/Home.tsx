@@ -1,14 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import HomeMain from "components/home/HomeMain";
 
 export default function Fun() {
   return (
     <Box>
-      <h1>Hello, Wolrd!</h1>
-      <h1>Hello, Wolrd!</h1>
-      <h1>Hello, Wolrd!</h1>
-      <h1>Hello, Wolrd!</h1>
-      <h1>Hello, Wolrd!</h1>
+      <HomeMain></HomeMain>
     </Box>
   );
 }

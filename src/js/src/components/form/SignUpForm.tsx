@@ -3,11 +3,11 @@ import { Box, Stack, TextField, Button } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ISignInForm } from "api/authApi";
+import { ISignUpForm } from "api/authApi";
 
 const schema = yup.object({
   email: yup.string().required("必須項目です").email("有効なメールアドレスを入力してください"),
-  name: yup.string().required("必須項目です"),
+  name: yup.string().required("必須項目です").min(2, "お名前は2文字以上を入力してください"),
   password: yup.string().required("必須項目です").min(6, "パスワードは6文字以上を入力してください")
   // .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&].*$/, "パスワード弱いよ")
 });
@@ -17,15 +17,13 @@ export default function Fun() {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<ISignInForm>({
+  } = useForm<ISignUpForm>({
     resolver: yupResolver(schema)
   });
 
-  const onSubmit: SubmitHandler<ISignInForm> = (data) => {
+  const onSubmit: SubmitHandler<ISignUpForm> = React.useCallback((data) => {
     // バリデーションチェックOK！なときに行う処理を追加
-    console.log("xxxxxxx");
-    console.log(data);
-  };
+  }, []);
 
   return (
     <Box sx={{ my: 3 }}>

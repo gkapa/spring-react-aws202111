@@ -57,9 +57,9 @@ public class UserService {
 
     public JwtDto signIn(UserDtos.signInReqDto data) {
         MUser mUser = mUserRepo.findByEmail(data.getEmail())
-                .orElseThrow(() -> new ApiRequestException("no user data: " + data.getEmail()));
+                .orElseThrow(() -> new ApiRequestException("存在しないメールアドレスです。"));
         if (!passwordEncoder.matches(data.getPassword(), mUser.getPassword())) {
-            throw new ApiRequestException("password not equals: " + data.getEmail());
+            throw new ApiRequestException("パスワードが一致しません。入力したパスワードをご確認ください。");
         }
         String[] jwtTokens = createJwtTokens(mUser, new ArrayList<>(Arrays.asList("ROLE_USER")));
         return JwtDto.builder()
