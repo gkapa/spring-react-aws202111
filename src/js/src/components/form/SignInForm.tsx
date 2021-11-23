@@ -23,12 +23,7 @@ export default function Fun() {
   const onSubmit: SubmitHandler<ISignInForm> = React.useCallback(async (data) => {
     try {
       const payload = await submitSignInForm(data);
-      console.log(payload);
-      cookies.setCookie("accessToken", payload.accessToken, {
-        path: "/",
-        secure: true,
-        sameSite: "none"
-      });
+      cookies.setAccessToken(payload.accessToken);
       window.open("/", "_self");
     } catch (error) {}
   }, []);
