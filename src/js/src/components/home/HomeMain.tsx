@@ -13,13 +13,6 @@ export default function Fun() {
   React.useEffect(() => {
     console.log("cookie:");
     console.log(document.cookie);
-    test();
-  }, []);
-
-  const test = React.useCallback(async () => {
-    try {
-      testApi();
-    } catch (error) {}
   }, []);
 
   return (

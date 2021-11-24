@@ -5,15 +5,11 @@ export interface ISignInForm {
   password: string;
 }
 
-export const refreshAccessToken = async () => {
-  const response = await fetch(`/api/user/refresh-access-token`, {
-    method: `POST`,
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
-  if (!response.ok) throw await response.json();
-};
+export interface ISignUpForm {
+  email: string;
+  name: string;
+  password: string;
+}
 
 export const submitSignInForm = async (data: ISignInForm) => {
   const response = await fetch(`/api/user/signIn`, {
@@ -26,12 +22,6 @@ export const submitSignInForm = async (data: ISignInForm) => {
   if (!response.ok) throw await response.json();
   // const payload = await response.json();
 };
-
-export interface ISignUpForm {
-  email: string;
-  name: string;
-  password: string;
-}
 
 export const submitSignUpForm = async (data: ISignUpForm) => {
   const response = await fetch(`/api/user/signUp`, {

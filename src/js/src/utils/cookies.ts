@@ -1,5 +1,6 @@
 import { Cookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
+import * as AuthApi from "api/authApi";
 
 const cookies = new Cookies();
 
@@ -24,17 +25,29 @@ export const getAccessToken = () => {
   return cookies.get(`accessToken`);
 };
 
-export const isAccessTokenValid = () => {
+export const isAccessTokenValid = async () => {
   const now = Date.now().valueOf() / 1000;
-  const token = cookies.get(`accessToken`);
-  if (!token) return;
-
-  const decodedToken: any = jwt_decode(token);
-  console.log(decodedToken.exp);
-  if (decodedToken.exp > now) {
-    return true;
+  const accessToken = cookies.get(`accessToken`);
+  if (accessToken) {
+    const decodedToken: any = jwt_decode(accessToken);
+    if (decodedToken.exp > now) {
+      return true;
+    }
   }
-  return false;
+
+  try {
+    const response = await fetch(`/api/token/refresh`, {
+      method: `GET`,
+      credentials: `same-origin`,
+      headers: {
+        "X-AUTH-TOKEN": accessToken
+      }
+    });
+  } catch (error) {
+    return false;
+  }
+
+  return true;
 
   // console.log({ ...decodedToken });
   // exp: 1637668693

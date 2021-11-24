@@ -55,12 +55,9 @@ public class UserController {
         return ResponseEntity.ok().body("Added User");
     }
 
-    @PostMapping("/refresh-access-token")
-    public ResponseEntity<?> tokenRefresh(@RequestBody JwtDtos.TokenRefreshRequestDto data) throws Exception {
-        String lg = "[Request] sign-up " + data.toString();
-        log.info(lg);
-//        userService.signUp(data);
-        return ResponseEntity.ok().body("??");
+    @GetMapping("/refreshToken")
+    public ResponseEntity<String> tokenRefresh() throws Exception {
+        return ResponseEntity.ok().body("ok");
     }
 
     @GetMapping("/user/regist")

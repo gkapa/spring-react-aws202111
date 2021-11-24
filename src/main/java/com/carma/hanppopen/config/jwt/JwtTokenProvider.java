@@ -56,7 +56,8 @@ public class JwtTokenProvider {
 
     public String createAccessToken(MUser user) {
         Claims claims = Jwts.claims().setSubject(Long.toString(user.getUserId())); //JWT payload에 저장되는 정보단위
-        claims.put("roles", user.getRole()); //key - value 쌍으로 저장
+        claims.put("roles", user.getRole());
+        claims.put("email", user.getEmail());
         claims.put("username", user.getUsername());
         Date now = new Date();
         return Jwts.builder()
@@ -67,7 +68,6 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    //JWT refresh token 생성
     public String createAndSaveRefreshToken(MUser user) {
         Claims claims = Jwts.claims().setSubject(Long.toString(user.getUserId()));
         String value = UUID.randomUUID().toString().replace("-", "");
@@ -88,13 +88,9 @@ public class JwtTokenProvider {
     public String reIssueAccessTokenFromRefreshToken(HttpServletResponse response, String refreshToken) throws JwtException {
         Long userId = Long.parseLong(getUserPk(refreshToken));
         MUser mUser = mUserRepo.findByUserId(userId);
-        System.out.println("---------....");
-        System.out.println(getClaims(refreshToken, "value"));
-        System.out.println(mUser.getRefreshToken());
         if (!mUser.getRefreshToken().equals(getClaims(refreshToken, "value"))) {
           return null;
         }
-        System.out.println("---------..xxxxx..");
         String newAccessToken = createAccessToken(mUser);
         String newRefreshToken = createAndSaveRefreshToken(mUser);
         setCookieToClient(response, newAccessToken, newRefreshToken);
@@ -135,7 +131,7 @@ public class JwtTokenProvider {
     public boolean validateToken(String jwtToken) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
-            return !claims.getBody().getExpiration().before(new Date()); //만료일자
+            return !claims.getBody().getExpiration().before(new Date());
         } catch (Exception e) {
             return false;
         }

@@ -16,17 +16,11 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/api/token")
 @CrossOrigin
-public class TestController {
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-
-    @GetMapping("/bbb")
+public class TokenController {
+    @GetMapping("/refresh")
     public ResponseEntity<String> testtest1() throws Exception {
-        System.out.println("okay okay");
-        return ResponseEntity.ok().body("dto 객체 검증 성공");
+        return ResponseEntity.ok().body("ok");
     }
 }

@@ -19,8 +19,13 @@ export default function Fun(props: any) {
   const [currentUser, setCurrentUser] = React.useState<ICurrentUser | null | undefined>(undefined);
 
   React.useEffect(() => {
-    if (cookies.isAccessTokenValid()) {
-    }
+    initUser();
+  }, []);
+
+  const initUser = React.useCallback(async () => {
+    try {
+      const isValid = await cookies.isAccessTokenValid();
+    } catch (error) {}
   }, []);
 
   return <AuthContext.Provider value={{ currentUser }}>{props.children}</AuthContext.Provider>;

@@ -22,7 +22,7 @@ export default function Fun() {
 
   const onSubmit: SubmitHandler<ISignInForm> = React.useCallback(async (data) => {
     try {
-      const payload = await submitSignInForm(data);
+      await submitSignInForm(data);
       window.open("/", "_self");
     } catch (error) {}
   }, []);
