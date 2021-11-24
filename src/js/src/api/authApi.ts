@@ -1,16 +1,22 @@
+import * as cookies from "utils/cookies";
+
 export interface ISignInForm {
   email: string;
   password: string;
 }
 
-interface IJwtoDto {
-  userId: number;
-  accessToken: string;
-  refreshToken: string;
-}
+export const refreshAccessToken = async () => {
+  const response = await fetch(`/api/user/refresh-access-token`, {
+    method: `POST`,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  if (!response.ok) throw await response.json();
+};
 
 export const submitSignInForm = async (data: ISignInForm) => {
-  const response = await fetch(`/api/sign-in`, {
+  const response = await fetch(`/api/user/signIn`, {
     method: `POST`,
     headers: {
       "Content-Type": "application/json"
@@ -18,8 +24,7 @@ export const submitSignInForm = async (data: ISignInForm) => {
     body: JSON.stringify(data)
   });
   if (!response.ok) throw await response.json();
-  const payload: IJwtoDto = await response.json();
-  return payload;
+  // const payload = await response.json();
 };
 
 export interface ISignUpForm {
@@ -29,7 +34,7 @@ export interface ISignUpForm {
 }
 
 export const submitSignUpForm = async (data: ISignUpForm) => {
-  const response = await fetch(`/api/sign-in`, {
+  const response = await fetch(`/api/user/signUp`, {
     method: `POST`,
     headers: {
       "Content-Type": "application/json"
@@ -45,4 +50,16 @@ export const getRegistResult = async () => {
   const email = new URLSearchParams(window.location.search).get("email");
   const response = await fetch(`/api/user/regist?key=${registKey};email=${email}`);
   if (!response.ok) throw await response.json();
+};
+
+export const testApi = async () => {
+  const response = await fetch(`/api/test/bbb`, {
+    method: `GET`,
+    credentials: "same-origin",
+    headers: {
+      "X-AUTH-TOKEN": cookies.getAccessToken()
+    }
+  });
+  if (!response.ok) throw await response.json();
+  return await response.json();
 };

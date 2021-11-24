@@ -21,6 +21,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -46,19 +48,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .authorizeRequests() //요청에 대한 권한 체크
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .and()
                 .cors()
                 .and()
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //토큰 기반 인증이라 세션은 사용하지 않음
                 .and()
-                .authorizeRequests() //요청에 대한 권한 체크
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .and()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
-                .antMatchers("/**").permitAll() //그외 나머지 요청은 누구나 접근 가능
+                .antMatchers("/api/user/**").permitAll()
+//                .antMatchers("/api/user/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class); //JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣음
@@ -67,15 +69,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // CORS 정책설정
 //        configuration.addAllowedOrigin("http://heydongdong.ewha.com.s3-website.ap-northeast-2.amazonaws.com");
-//        configuration.addAllowedOrigin("http://heydongdong-admin.ewha.com.s3-website.ap-northeast-2.amazonaws.com");
-//        configuration.addAllowedOrigin("http://localhost:8080");
-//        configuration.addAllowedOrigin("http://localhost:5000");
 //        configuration.addAllowedOrigin("http://localhost:3000");
-        configuration.addAllowedOrigin("*");
-        configuration.addAllowedMethod("*");
-        configuration.addAllowedHeader("*");
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+//        configuration.setAllowedHeaders(Arrays.asList("Authorization", "content-type", "credentials", JWT_HEADER, "ref-token"));
+        configuration.setExposedHeaders(Arrays.asList("*"));
+//        configuration.setExposedHeaders(Arrays.asList(JWT_HEADER, "Set-Cookie"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L); //preflight 결과를 1시간동안 캐시에 저장
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

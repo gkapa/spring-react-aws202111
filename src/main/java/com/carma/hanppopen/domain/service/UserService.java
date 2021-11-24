@@ -1,9 +1,8 @@
 package com.carma.hanppopen.domain.service;
 
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.carma.hanppopen.config.jwt.JwtTokenProvider;
 import com.carma.hanppopen.domain.exception.ApiRequestException;
-import com.carma.hanppopen.infra.dto.JwtDto;
+import com.carma.hanppopen.infra.dto.JwtDtos;
 import com.carma.hanppopen.infra.dto.UserDtos;
 import com.carma.hanppopen.infra.entity.MUser;
 import com.carma.hanppopen.infra.repository.MUserRepo;
@@ -11,10 +10,10 @@ import com.carma.hanppopen.infra.repository.MUserStatusRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @Service
@@ -55,18 +54,20 @@ public class UserService {
         mailService.sendSignUpEmail("[HAN] ポートフォリオサイト登録認証用メール", data.getEmail(), newUser.getEmail(), registKey);
     }
 
-    public JwtDto signIn(UserDtos.signInReqDto data) {
+    public void signIn(HttpServletResponse response, UserDtos.signInReqDto data) {
         MUser mUser = mUserRepo.findByEmail(data.getEmail())
                 .orElseThrow(() -> new ApiRequestException("存在しないメールアドレスです。"));
         if (!passwordEncoder.matches(data.getPassword(), mUser.getPassword())) {
             throw new ApiRequestException("パスワードが一致しません。入力したパスワードをご確認ください。");
         }
-        String[] jwtTokens = createJwtTokens(mUser, new ArrayList<>(Arrays.asList("ROLE_USER")));
-        return JwtDto.builder()
-                .userId(mUser.getUserId())
-                .accessToken(jwtTokens[0])
-                .refreshToken(jwtTokens[1])
-                .build();
+        String[] jwtTokens = createJwtTokens(mUser);
+        jwtTokenProvider.setCookieToClient(response, jwtTokens[0], jwtTokens[1]);
+//        JwtDtos.JwtDto dto = JwtDtos.JwtDto.builder()
+//                .userId(mUser.getUserId())
+//                .accessToken(jwtTokens[0])
+//                .refreshToken(jwtTokens[1])
+//                .build();
+
     }
 
     public void updateUserStatusToAuthenticated(String registKey, String email) {
@@ -84,16 +85,9 @@ public class UserService {
         mUserRepo.save(newUser);
     }
 
-    private String[] createJwtTokens(MUser user, List<String> roles) {
-        String accessToken = jwtTokenProvider.createAccessToken(user.getUsername(), roles);
-        String refreshTokenValue = UUID.randomUUID().toString().replace("-", "");
-        String refreshToken = jwtTokenProvider.createRefreshToken(refreshTokenValue);
-        saveRefreshTokenValue(user, refreshTokenValue);
+    private String[] createJwtTokens(MUser mUser) {
+        String accessToken = jwtTokenProvider.createAccessToken(mUser);
+        String refreshToken = jwtTokenProvider.createAndSaveRefreshToken(mUser);
         return new String[]{accessToken, refreshToken};
-    }
-
-    private void saveRefreshTokenValue(MUser user, String refreshToken) {
-        user.setRefreshToken(refreshToken);
-        mUserRepo.save(user);
     }
 }
