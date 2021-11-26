@@ -8,8 +8,28 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import * as gb from "styles/globalConsts";
 import { Link } from "react-router-dom";
+import { AuthContext } from "components/auth/Auth";
+import * as cookies from "utils/cookies";
+import { submitSignOut } from "api/authApi";
 
-export default function fun() {
+export default function Fun() {
+  const { currentUser, setCurrentUser } = React.useContext(AuthContext);
+
+  React.useEffect(() => {
+    console.log(`current: ` + currentUser?.email);
+    console.log(cookies.getCookie("accessToken"));
+  }, [currentUser]);
+
+  const onClickLogout = React.useCallback(async () => {
+    try {
+      await submitSignOut();
+      setCurrentUser(undefined);
+      window.open("/", "_self");
+    } catch (error) {
+      console.log("ログアウト　失敗");
+    }
+  }, [currentUser]);
+
   return (
     <Box>
       <AppBar
@@ -23,11 +43,18 @@ export default function fun() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             News
           </Typography>
-          <Link to="/auth/signIn">
-            <Button variant="contained" color="inherit" sx={{ background: "#ffe082" }}>
-              ログイン
+
+          {currentUser ? (
+            <Button variant="contained" color="inherit" sx={{ background: "#ffe082" }} onClick={() => onClickLogout()}>
+              ログアウト
             </Button>
-          </Link>
+          ) : (
+            <Link to="/auth/signIn">
+              <Button variant="contained" color="inherit" sx={{ background: "#ffe082" }}>
+                ログイン
+              </Button>
+            </Link>
+          )}
           <IconButton
             size="large"
             edge="start"

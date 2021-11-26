@@ -12,6 +12,12 @@ export const getCookie = (name: string) => {
   return cookies.get(name);
 };
 
+export const removeCookie = (name: string) => {
+  cookies.set(name, "a", {
+    expires: new Date(1997, 11, 17)
+  });
+};
+
 export const setAccessToken = (accessToken: string) => {
   setCookie("accessToken", accessToken, {
     path: "/",
@@ -25,29 +31,30 @@ export const getAccessToken = () => {
   return cookies.get(`accessToken`);
 };
 
-export const isAccessTokenValid = async () => {
+export const getDecodedJwtTokenFromAccessToken = async () => {
   const now = Date.now().valueOf() / 1000;
-  const accessToken = cookies.get(`accessToken`);
+  let accessToken = cookies.get(`accessToken`);
   if (accessToken) {
     const decodedToken: any = jwt_decode(accessToken);
     if (decodedToken.exp > now) {
-      return true;
+      return decodedToken;
     }
   }
 
-  try {
-    const response = await fetch(`/api/token/refresh`, {
-      method: `GET`,
-      credentials: `same-origin`,
-      headers: {
-        "X-AUTH-TOKEN": accessToken
-      }
-    });
-  } catch (error) {
-    return false;
+  const response = await fetch(`/api/token/refresh`, {
+    method: `GET`,
+    credentials: `same-origin`
+  });
+  if (!response.ok) throw false;
+  accessToken = cookies.get(`accessToken`);
+  if (accessToken) {
+    const decodedToken: any = jwt_decode(accessToken);
+    if (decodedToken.exp > now) {
+      return decodedToken;
+    }
   }
 
-  return true;
+  throw false;
 
   // console.log({ ...decodedToken });
   // exp: 1637668693

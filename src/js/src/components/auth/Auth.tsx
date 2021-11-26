@@ -2,17 +2,19 @@ import React from "react";
 import * as cookies from "utils/cookies";
 import jwt_decode from "jwt-decode";
 
-interface ICurrentUser {
-  email: "";
-  username: "";
+export interface ICurrentUser {
+  email: string;
+  username: string;
 }
 
 interface IAuthContext {
   currentUser: ICurrentUser | null | undefined;
+  setCurrentUser: any;
 }
 
 export const AuthContext = React.createContext<IAuthContext>({
-  currentUser: undefined
+  currentUser: undefined,
+  setCurrentUser: null
 });
 
 export default function Fun(props: any) {
@@ -24,9 +26,12 @@ export default function Fun(props: any) {
 
   const initUser = React.useCallback(async () => {
     try {
-      const isValid = await cookies.isAccessTokenValid();
-    } catch (error) {}
+      const decodedJwtToken = await cookies.getDecodedJwtTokenFromAccessToken();
+      setCurrentUser({ ...decodedJwtToken });
+    } catch (error) {
+      setCurrentUser(undefined);
+    }
   }, []);
 
-  return <AuthContext.Provider value={{ currentUser }}>{props.children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ currentUser, setCurrentUser }}>{props.children}</AuthContext.Provider>;
 }

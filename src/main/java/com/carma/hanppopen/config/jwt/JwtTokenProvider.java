@@ -85,6 +85,18 @@ public class JwtTokenProvider {
         return refreshToken;
     }
 
+    public void expireAccessAndRefreshToken(HttpServletResponse response) {
+        Cookie accessCookie = new Cookie(ACCESS_TOKEN_NAME, "0");
+        accessCookie.setPath("/");
+        accessCookie.setMaxAge(0);
+        response.addCookie(accessCookie);
+        Cookie refreshCookie = new Cookie(REFRESH_TOKEN_NAME, "0");
+        refreshCookie.setHttpOnly(true);
+        refreshCookie.setPath("/");
+        refreshCookie.setMaxAge(0);
+        response.addCookie(refreshCookie);
+    }
+
     public String reIssueAccessTokenFromRefreshToken(HttpServletResponse response, String refreshToken) throws JwtException {
         Long userId = Long.parseLong(getUserPk(refreshToken));
         MUser mUser = mUserRepo.findByUserId(userId);

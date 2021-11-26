@@ -54,6 +54,10 @@ public class UserService {
         mailService.sendSignUpEmail("[HAN] ポートフォリオサイト登録認証用メール", data.getEmail(), newUser.getEmail(), registKey);
     }
 
+    public void signOut(HttpServletResponse response) {
+        jwtTokenProvider.expireAccessAndRefreshToken(response);
+    }
+
     public void signIn(HttpServletResponse response, UserDtos.signInReqDto data) {
         MUser mUser = mUserRepo.findByEmail(data.getEmail())
                 .orElseThrow(() -> new ApiRequestException("存在しないメールアドレスです。"));

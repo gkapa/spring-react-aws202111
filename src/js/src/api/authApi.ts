@@ -23,6 +23,12 @@ export const submitSignInForm = async (data: ISignInForm) => {
   // const payload = await response.json();
 };
 
+export const submitSignOut = async () => {
+  const response = await fetch(`/api/user/signOut`);
+  if (!response.ok) throw await response.json();
+  return await response.json();
+};
+
 export const submitSignUpForm = async (data: ISignUpForm) => {
   const response = await fetch(`/api/user/signUp`, {
     method: `POST`,

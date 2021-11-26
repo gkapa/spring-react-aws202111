@@ -9,7 +9,7 @@ import Navbar from "components/navbar/Navbar";
 import Box from "@mui/material/Box";
 import * as gb from "styles/globalConsts";
 
-import AuthProvider, { AuthContext } from "components/auth/Auth";
+import AuthProvider from "components/auth/Auth";
 import Home from "pages/home/Home";
 import SignIn from "pages/auth/SignIn";
 import SignUp from "pages/auth/SignUp";

@@ -47,6 +47,12 @@ public class UserController {
         return ResponseEntity.ok().body("ok");
     }
 
+    @GetMapping("/logout")
+    public ResponseEntity<?> signOut(HttpServletResponse response) throws Exception {
+        userService.signOut(response);
+        return ResponseEntity.ok().body("ok");
+    }
+
     @PostMapping("/signUp")
     public ResponseEntity<?> signIn(@Valid @RequestBody UserDtos.signUpReqDto data) throws Exception {
         String lg = "[Request] sign-up " + data.getEmail();
