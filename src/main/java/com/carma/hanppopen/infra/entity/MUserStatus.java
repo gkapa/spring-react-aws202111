@@ -11,11 +11,11 @@ import java.util.UUID;
 @Entity
 @Getter @Setter @ToString
 @Builder @NoArgsConstructor @AllArgsConstructor
-@Table(name = "m_user_status")
+@Table(name = "ma_user_status")
 public class MUserStatus {
     @Id
     private Integer statusId;
 
     @Column
-    private String content;
+    private String statusTx;
 }

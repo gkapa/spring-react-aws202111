@@ -8,10 +8,6 @@ import { getRegistResult } from "api/authApi";
 export default function Fun() {
   const [isFetched, setIsFetched] = React.useState(false);
 
-  React.useEffect(() => {
-    initData();
-  }, []);
-
   const initData = React.useCallback(async () => {
     try {
       await getRegistResult();
@@ -20,6 +16,10 @@ export default function Fun() {
       window.open("/NotFound", "_self");
     }
   }, []);
+
+  React.useEffect(() => {
+    initData();
+  }, [initData]);
 
   return <Box>{isFetched ? <RegistCard></RegistCard> : <Spinner></Spinner>}</Box>;
 }

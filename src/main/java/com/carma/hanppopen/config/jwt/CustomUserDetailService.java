@@ -1,8 +1,7 @@
 package com.carma.hanppopen.config.jwt;
 
-import com.carma.hanppopen.infra.entity.MUser;
-import com.carma.hanppopen.infra.repository.MUserRepo;
-import lombok.RequiredArgsConstructor;
+import com.carma.hanppopen.infra.entity.TUser;
+import com.carma.hanppopen.infra.repository.TUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,16 +14,16 @@ import java.util.Arrays;
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 
-    private final MUserRepo mUserRepo;
+    private final TUserRepo tUserRepo;
 
     @Autowired
-    public CustomUserDetailService(MUserRepo mUserRepo) {
-        this.mUserRepo = mUserRepo;
+    public CustomUserDetailService(TUserRepo tUserRepo) {
+        this.tUserRepo = tUserRepo;
     }
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        MUser user = mUserRepo.findByUserId(Long.parseLong(userId));
+        TUser user = tUserRepo.findByUserId(Long.parseLong(userId));
         if (user == null) {
             throw new UsernameNotFoundException("User: " + userId + " not found");
         }

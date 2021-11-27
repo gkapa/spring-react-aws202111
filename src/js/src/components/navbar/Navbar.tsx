@@ -1,24 +1,19 @@
 import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+import { AppBar, Toolbar, Box, Typography, Button, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import * as gb from "styles/globalConsts";
 import { Link } from "react-router-dom";
 import { AuthContext } from "components/auth/Auth";
-import * as cookies from "utils/cookies";
+// import * as cookies from "utils/cookies";
 import { submitSignOut } from "api/authApi";
 
 export default function Fun() {
   const { currentUser, setCurrentUser } = React.useContext(AuthContext);
 
   React.useEffect(() => {
-    console.log(`current: ` + currentUser?.email);
-    console.log(cookies.getCookie("accessToken"));
-  }, [currentUser]);
+    // console.log(`current: ` + currentUser?.email);
+    // console.log(cookies.getCookie("accessToken"));
+  }, []);
 
   const onClickLogout = React.useCallback(async () => {
     try {
@@ -28,7 +23,7 @@ export default function Fun() {
     } catch (error) {
       console.log("ログアウト　失敗");
     }
-  }, [currentUser]);
+  }, [setCurrentUser]);
 
   return (
     <Box>

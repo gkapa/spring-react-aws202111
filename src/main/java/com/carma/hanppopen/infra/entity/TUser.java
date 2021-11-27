@@ -11,9 +11,9 @@ import java.util.UUID;
 @Entity
 @Getter @Setter @ToString
 @Builder @NoArgsConstructor @AllArgsConstructor
-@Table(name = "m_user")
+@Table(name = "ta_user")
 @DynamicInsert
-public class MUser {
+public class TUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;

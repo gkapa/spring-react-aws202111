@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/signIn")
-    public ResponseEntity<?> signIn(@Valid @RequestBody UserDtos.signInReqDto data, HttpServletResponse response) throws Exception {
+    public ResponseEntity<?> signIn(@Valid @RequestBody UserDtos.SignInReqDto data, HttpServletResponse response) throws Exception {
         String lg = "[Request] sign-in " + data.getEmail();
         log.info(lg);
 
@@ -54,7 +54,7 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public ResponseEntity<?> signIn(@Valid @RequestBody UserDtos.signUpReqDto data) throws Exception {
+    public ResponseEntity<?> signIn(@Valid @RequestBody UserDtos.SignUpReqDto data) throws Exception {
         String lg = "[Request] sign-up " + data.getEmail();
         log.info(lg);
         userService.signUp(data);

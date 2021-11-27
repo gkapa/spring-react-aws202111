@@ -1,10 +1,10 @@
 import React from "react";
-import { Box, FormControl, Stack, TextField, Button } from "@mui/material";
+import { Box, Typography, Stack, TextField, Button } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ISignInForm, submitSignInForm } from "api/authApi";
-import * as cookies from "utils/cookies";
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 
 const schema = yup.object({
   email: yup.string().required("必須項目です").email("有効なメールアドレスを入力してください"),
@@ -48,6 +48,25 @@ export default function Fun() {
         />
         <Button type="submit" color="primary" variant="contained" size="large" onClick={handleSubmit(onSubmit)}>
           ログイン
+        </Button>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <hr style={{ background: "#1976D2", flexGrow: 1 }}></hr>
+
+          <Typography sx={{ mx: 2 }}>
+            <ArrowCircleDownIcon sx={{ verticalAlign: "middle", mr: 1 }} />
+            はじめてのご利用の方
+          </Typography>
+          <hr style={{ background: "#1976D2", flexGrow: 1 }}></hr>
+        </Box>
+        <Button
+          type="submit"
+          color="secondary"
+          variant="contained"
+          size="large"
+          onClick={() => window.open("/auth/signUp", "_self")}
+          sx={{ background: "#DF5D4F" }}
+        >
+          新規登録
         </Button>
       </Stack>
     </Box>

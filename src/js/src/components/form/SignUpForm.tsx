@@ -16,45 +16,54 @@ export default function Fun() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm<ISignUpForm>({
     resolver: yupResolver(schema)
   });
 
-  const onSubmit: SubmitHandler<ISignUpForm> = React.useCallback((data) => {
-    // バリデーションチェックOK！なときに行う処理を追加
-  }, []);
+  const onSubmit: SubmitHandler<ISignUpForm> = React.useCallback(
+    (data) => {
+      // バリデーションチェックOK！なときに行う処理を追加
+      if (Object.keys(errors).length === 0) {
+        setError("email", { type: "manual", message: "hello?" });
+      }
+    },
+    [errors, setError]
+  );
 
   return (
     <Box sx={{ my: 3 }}>
-      <Stack spacing={3} sx={{ width: "80%", mx: "auto" }}>
-        <TextField
-          required
-          label="メールアドレス"
-          type="email"
-          {...register("email")}
-          error={"email" in errors}
-          helperText={errors.email?.message}
-        />
-        <TextField
-          required
-          label="お名前"
-          {...register("name")}
-          error={"name" in errors}
-          helperText={errors.name?.message}
-        />
-        <TextField
-          required
-          label="パスワード"
-          type="password"
-          {...register("password")}
-          error={"password" in errors}
-          helperText={errors.password?.message}
-        />
-        <Button type="submit" color="primary" variant="contained" size="large" onClick={handleSubmit(onSubmit)}>
-          作成
-        </Button>
-      </Stack>
+      <form onSubmit={() => handleSubmit(onSubmit)}>
+        <Stack spacing={3} sx={{ width: "80%", mx: "auto" }}>
+          <TextField
+            required
+            label="メールアドレス"
+            type="email"
+            {...register("email")}
+            error={"email" in errors}
+            helperText={errors.email?.message}
+          />
+          <TextField
+            required
+            label="お名前"
+            {...register("name")}
+            error={"name" in errors}
+            helperText={errors.name?.message}
+          />
+          <TextField
+            required
+            label="パスワード"
+            type="password"
+            {...register("password")}
+            error={"password" in errors}
+            helperText={errors.password?.message}
+          />
+          <Button type="submit" color="primary" variant="contained" size="large" onClick={handleSubmit(onSubmit)}>
+            会員登録
+          </Button>
+        </Stack>
+      </form>
     </Box>
   );
 }

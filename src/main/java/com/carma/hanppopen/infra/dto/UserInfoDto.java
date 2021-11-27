@@ -10,13 +10,4 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-@Data
-public class UserInfoDto {
-    private Long userId;
 
-    private String name;
-
-    private String email;
-
-    private Integer loginFailCnt;
-}

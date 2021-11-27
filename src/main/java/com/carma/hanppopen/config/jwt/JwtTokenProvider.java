@@ -1,7 +1,7 @@
 package com.carma.hanppopen.config.jwt;
 
-import com.carma.hanppopen.infra.entity.MUser;
-import com.carma.hanppopen.infra.repository.MUserRepo;
+import com.carma.hanppopen.infra.entity.TUser;
+import com.carma.hanppopen.infra.repository.TUserRepo;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,12 +39,12 @@ public class JwtTokenProvider {
     private String REFRESH_TOKEN_NAME;
 
     private UserDetailsService userDetailsService;
-    private MUserRepo mUserRepo;
+    private TUserRepo tUserRepo;
 
     @Autowired
-    public JwtTokenProvider(UserDetailsService userDetailsService, MUserRepo mUserRepo) {
+    public JwtTokenProvider(UserDetailsService userDetailsService, TUserRepo tUserRepo) {
         this.userDetailsService = userDetailsService;
-        this.mUserRepo = mUserRepo;
+        this.tUserRepo = tUserRepo;
     }
 
     @PostConstruct
@@ -54,7 +53,7 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createAccessToken(MUser user) {
+    public String createAccessToken(TUser user) {
         Claims claims = Jwts.claims().setSubject(Long.toString(user.getUserId())); //JWT payload에 저장되는 정보단위
         claims.put("roles", user.getRole());
         claims.put("email", user.getEmail());
@@ -68,7 +67,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String createAndSaveRefreshToken(MUser user) {
+    public String createAndSaveRefreshToken(TUser user) {
         Claims claims = Jwts.claims().setSubject(Long.toString(user.getUserId()));
         String value = UUID.randomUUID().toString().replace("-", "");
         claims.put("value", value);
@@ -81,7 +80,7 @@ public class JwtTokenProvider {
                 .signWith(SignatureAlgorithm.HS256, secretKey) //사용할 암호화 알고리즘
                 .compact();
         user.setRefreshToken(value);
-        mUserRepo.save(user);
+        tUserRepo.save(user);
         return refreshToken;
     }
 
@@ -99,12 +98,12 @@ public class JwtTokenProvider {
 
     public String reIssueAccessTokenFromRefreshToken(HttpServletResponse response, String refreshToken) throws JwtException {
         Long userId = Long.parseLong(getUserPk(refreshToken));
-        MUser mUser = mUserRepo.findByUserId(userId);
-        if (!mUser.getRefreshToken().equals(getClaims(refreshToken, "value"))) {
+        TUser tUser = tUserRepo.findByUserId(userId);
+        if (!tUser.getRefreshToken().equals(getClaims(refreshToken, "value"))) {
           return null;
         }
-        String newAccessToken = createAccessToken(mUser);
-        String newRefreshToken = createAndSaveRefreshToken(mUser);
+        String newAccessToken = createAccessToken(tUser);
+        String newRefreshToken = createAndSaveRefreshToken(tUser);
         setCookieToClient(response, newAccessToken, newRefreshToken);
         return newAccessToken;
     }

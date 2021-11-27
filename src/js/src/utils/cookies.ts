@@ -1,6 +1,5 @@
 import { Cookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
-import * as AuthApi from "api/authApi";
 
 const cookies = new Cookies();
 
@@ -45,7 +44,7 @@ export const getDecodedJwtTokenFromAccessToken = async () => {
     method: `GET`,
     credentials: `same-origin`
   });
-  if (!response.ok) throw false;
+  if (!response.ok) throw await "fetch failed";
   accessToken = cookies.get(`accessToken`);
   if (accessToken) {
     const decodedToken: any = jwt_decode(accessToken);
@@ -54,7 +53,7 @@ export const getDecodedJwtTokenFromAccessToken = async () => {
     }
   }
 
-  throw false;
+  throw await "no login data";
 
   // console.log({ ...decodedToken });
   // exp: 1637668693

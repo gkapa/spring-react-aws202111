@@ -2,10 +2,9 @@ package com.carma.hanppopen.domain.service;
 
 import com.carma.hanppopen.config.jwt.JwtTokenProvider;
 import com.carma.hanppopen.domain.exception.ApiRequestException;
-import com.carma.hanppopen.infra.dto.JwtDtos;
 import com.carma.hanppopen.infra.dto.UserDtos;
-import com.carma.hanppopen.infra.entity.MUser;
-import com.carma.hanppopen.infra.repository.MUserRepo;
+import com.carma.hanppopen.infra.entity.TUser;
+import com.carma.hanppopen.infra.repository.TUserRepo;
 import com.carma.hanppopen.infra.repository.MUserStatusRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -29,28 +28,28 @@ public class UserService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    private MUserRepo mUserRepo;
+    private TUserRepo tUserRepo;
     private MUserStatusRepo mUserStatusRepo;
     private MailService mailService;
 
     @Autowired
-    public UserService(MUserRepo mUserRepo, MUserStatusRepo mUserStatusRepo, MailService mailService) {
-        this.mUserRepo = mUserRepo;
+    public UserService(TUserRepo tUserRepo, MUserStatusRepo mUserStatusRepo, MailService mailService) {
+        this.tUserRepo = tUserRepo;
         this.mUserStatusRepo = mUserStatusRepo;
         this.mailService = mailService;
     }
 
-    public void signUp(UserDtos.signUpReqDto data) {
-        Optional<MUser> mUser = mUserRepo.findByEmail(data.getEmail());
+    public void signUp(UserDtos.SignUpReqDto data) {
+        Optional<TUser> mUser = tUserRepo.findByEmail(data.getEmail());
         mUser.ifPresent(x -> new ApiRequestException("email already exist: " + data.getEmail()));
         String registKey = UUID.randomUUID().toString();
-        MUser newUser = MUser.builder()
+        TUser newUser = TUser.builder()
                 .username(data.getUsername())
                 .password(passwordEncoder.encode(data.getPassword()))
                 .email(data.getEmail())
                 .refreshToken(registKey)
                 .build();
-        mUserRepo.save(newUser);
+        tUserRepo.save(newUser);
         mailService.sendSignUpEmail("[HAN] ポートフォリオサイト登録認証用メール", data.getEmail(), newUser.getEmail(), registKey);
     }
 
@@ -58,13 +57,13 @@ public class UserService {
         jwtTokenProvider.expireAccessAndRefreshToken(response);
     }
 
-    public void signIn(HttpServletResponse response, UserDtos.signInReqDto data) {
-        MUser mUser = mUserRepo.findByEmail(data.getEmail())
+    public void signIn(HttpServletResponse response, UserDtos.SignInReqDto data) {
+        TUser tUser = tUserRepo.findByEmail(data.getEmail())
                 .orElseThrow(() -> new ApiRequestException("存在しないメールアドレスです。"));
-        if (!passwordEncoder.matches(data.getPassword(), mUser.getPassword())) {
+        if (!passwordEncoder.matches(data.getPassword(), tUser.getPassword())) {
             throw new ApiRequestException("パスワードが一致しません。入力したパスワードをご確認ください。");
         }
-        String[] jwtTokens = createJwtTokens(mUser);
+        String[] jwtTokens = createJwtTokens(tUser);
         jwtTokenProvider.setCookieToClient(response, jwtTokens[0], jwtTokens[1]);
 //        JwtDtos.JwtDto dto = JwtDtos.JwtDto.builder()
 //                .userId(mUser.getUserId())
@@ -75,23 +74,23 @@ public class UserService {
     }
 
     public void updateUserStatusToAuthenticated(String registKey, String email) {
-        MUser mUser = mUserRepo.findByEmail(email)
+        TUser tUser = tUserRepo.findByEmail(email)
                 .orElseThrow(() -> new ApiRequestException("no user data: " + email));
-        if (!registKey.equals(mUser.getRefreshToken())) {
+        if (!registKey.equals(tUser.getRefreshToken())) {
             throw new ApiRequestException("registKey not equals, user: " + email);
         }
-        if (!mUser.getStatus().equals(mUserStatusRepo.findByContent("WAIT_EMAIL_AUTHENTICATION").getStatusId())) {
+        if (!tUser.getStatus().equals(mUserStatusRepo.findByStatusTx("WAIT_EMAIL_AUTHENTICATION").getStatusId())) {
             throw new ApiRequestException("User status is not UNAUTHENTICATED: " + email);
         }
-        MUser newUser = modelMapper.map(mUser, MUser.class);
-        newUser.setStatus(mUserStatusRepo.findByContent("AUTHENTICATED").getStatusId());
+        TUser newUser = modelMapper.map(tUser, TUser.class);
+        newUser.setStatus(mUserStatusRepo.findByStatusTx("AUTHENTICATED").getStatusId());
 
-        mUserRepo.save(newUser);
+        tUserRepo.save(newUser);
     }
 
-    private String[] createJwtTokens(MUser mUser) {
-        String accessToken = jwtTokenProvider.createAccessToken(mUser);
-        String refreshToken = jwtTokenProvider.createAndSaveRefreshToken(mUser);
+    private String[] createJwtTokens(TUser tUser) {
+        String accessToken = jwtTokenProvider.createAccessToken(tUser);
+        String refreshToken = jwtTokenProvider.createAndSaveRefreshToken(tUser);
         return new String[]{accessToken, refreshToken};
     }
 }
