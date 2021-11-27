@@ -3,6 +3,7 @@ package com.carma.hanppopen.domain.service;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.*;
 import com.carma.hanppopen.domain.exception.ApiRequestException;
+import com.carma.hanppopen.domain.exception.ExceptionEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,7 +54,7 @@ public class MailService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ApiRequestException("email address malformed: " + email);
+            throw new ApiRequestException(ExceptionEnum.SIGN_EMAIL_NOT_EXIST);
         }
     }
 }

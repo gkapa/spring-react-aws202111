@@ -1,6 +1,8 @@
 package com.carma.hanppopen.controller;
 
 import com.carma.hanppopen.config.jwt.JwtTokenProvider;
+import com.carma.hanppopen.domain.exception.ApiRequestException;
+import com.carma.hanppopen.domain.exception.ExceptionEnum;
 import com.carma.hanppopen.infra.dto.JwtDtos;
 import com.carma.hanppopen.infra.dto.UserDtos;
 import com.carma.hanppopen.domain.service.UserService;
@@ -9,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Collections;
 
 @Slf4j
 @RestController
@@ -44,41 +48,41 @@ public class UserController {
         log.info(lg);
 
         userService.signIn(response, data);
-        return ResponseEntity.ok().body("ok");
+        return ResponseEntity.ok().body(Collections.singletonMap("response", "ok"));
     }
 
     @GetMapping("/logout")
     public ResponseEntity<?> signOut(HttpServletResponse response) throws Exception {
         userService.signOut(response);
-        return ResponseEntity.ok().body("ok");
+        return ResponseEntity.ok().body(Collections.singletonMap("response", "ok"));
     }
 
     @PostMapping("/signUp")
-    public ResponseEntity<?> signIn(@Valid @RequestBody UserDtos.SignUpReqDto data) throws Exception {
-        String lg = "[Request] sign-up " + data.getEmail();
-        log.info(lg);
+    public ResponseEntity<?> signUp(@Valid @RequestBody UserDtos.SignUpReqDto data) throws Exception {
+        log.info("[Start] Request sign-up " + data.getEmail());
         userService.signUp(data);
-        return ResponseEntity.ok().body("Added User");
+        log.info("[End] Request sign-up " + data.getEmail());
+        return ResponseEntity.ok().body(Collections.singletonMap("response", "ok"));
     }
 
     @GetMapping("/refreshToken")
-    public ResponseEntity<String> tokenRefresh() throws Exception {
-        return ResponseEntity.ok().body("ok");
+    public ResponseEntity<?> tokenRefresh() throws Exception {
+        return ResponseEntity.ok().body(Collections.singletonMap("response", "ok"));
     }
 
-    @GetMapping("/user/regist")
+    @GetMapping("/regist")
     public ResponseEntity<?> completeSignUp(
             @RequestParam("key") String registKey,
             @RequestParam("email") String email) throws Exception {
         log.info("Request of signUp completion:: key: " + registKey + ", email: " + email);
         userService.updateUserStatusToAuthenticated(registKey, email);
-        return ResponseEntity.ok().body("User Authenticated Sign");
+        return ResponseEntity.ok().body(Collections.singletonMap("response", "ok"));
     }
 
-    @GetMapping("/access-checker")
-    public ResponseEntity<?> completeSignUp(@RequestHeader(name="Authorization") String header) {
-        log.info(header);
-        System.out.println(header);
-        return ResponseEntity.ok().body("okok");
-    }
+//    @GetMapping("/access-checker")
+//    public ResponseEntity<?> completeSignUp(@RequestHeader(name="Authorization") String header) {
+//        log.info(header);
+//        System.out.println(header);
+//        return ResponseEntity.ok().body(Collections.singletonMap("response", "ok"));
+//    }
 }

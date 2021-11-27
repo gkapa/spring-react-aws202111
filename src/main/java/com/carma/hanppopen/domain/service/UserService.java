@@ -2,6 +2,7 @@ package com.carma.hanppopen.domain.service;
 
 import com.carma.hanppopen.config.jwt.JwtTokenProvider;
 import com.carma.hanppopen.domain.exception.ApiRequestException;
+import com.carma.hanppopen.domain.exception.ExceptionEnum;
 import com.carma.hanppopen.infra.dto.UserDtos;
 import com.carma.hanppopen.infra.entity.TUser;
 import com.carma.hanppopen.infra.repository.TUserRepo;
@@ -41,7 +42,9 @@ public class UserService {
 
     public void signUp(UserDtos.SignUpReqDto data) {
         Optional<TUser> mUser = tUserRepo.findByEmail(data.getEmail());
-        mUser.ifPresent(x -> new ApiRequestException("email already exist: " + data.getEmail()));
+        mUser.ifPresent(x -> {
+            throw new ApiRequestException(ExceptionEnum.SIGN_EMAIL_ALREADY_EXIST);
+        });
         String registKey = UUID.randomUUID().toString();
         TUser newUser = TUser.builder()
                 .username(data.getUsername())
@@ -49,8 +52,8 @@ public class UserService {
                 .email(data.getEmail())
                 .refreshToken(registKey)
                 .build();
-        tUserRepo.save(newUser);
         mailService.sendSignUpEmail("[HAN] ポートフォリオサイト登録認証用メール", data.getEmail(), newUser.getEmail(), registKey);
+        tUserRepo.save(newUser);
     }
 
     public void signOut(HttpServletResponse response) {

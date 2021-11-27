@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import RegistCard from "components/card/RegistCompleteCard";
+import EmailVerificationCompleteCard from "components/card/EmailVerificationCompleteCard";
 import Spinner from "atoms/Spinner";
 
 import { getRegistResult } from "api/authApi";
@@ -21,5 +21,5 @@ export default function Fun() {
     initData();
   }, [initData]);
 
-  return <Box>{isFetched ? <RegistCard></RegistCard> : <Spinner></Spinner>}</Box>;
+  return <Box>{isFetched ? <EmailVerificationCompleteCard></EmailVerificationCompleteCard> : <Spinner></Spinner>}</Box>;
 }

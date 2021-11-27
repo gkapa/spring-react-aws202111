@@ -13,7 +13,7 @@ interface IAuthContext {
 
 export const AuthContext = React.createContext<IAuthContext>({
   currentUser: undefined,
-  setCurrentUser: null
+  setCurrentUser: () => {}
 });
 
 export default function Fun(props: any) {

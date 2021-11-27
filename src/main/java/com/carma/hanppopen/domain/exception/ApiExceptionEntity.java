@@ -16,6 +16,5 @@ public class ApiExceptionEntity {
     public ApiExceptionEntity(String message, String errorCode, HttpStatus httpStatus) {
         this.message = message;
         this.errorCode = errorCode;
-        this.httpStatus = httpStatus;
     }
 }

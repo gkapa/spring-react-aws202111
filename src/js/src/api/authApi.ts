@@ -1,4 +1,4 @@
-import * as cookies from "utils/cookies";
+// import * as cookies from "utils/cookies";
 
 export interface ISignInForm {
   email: string;
@@ -7,7 +7,7 @@ export interface ISignInForm {
 
 export interface ISignUpForm {
   email: string;
-  name: string;
+  username: string;
   password: string;
 }
 
@@ -20,7 +20,6 @@ export const submitSignInForm = async (data: ISignInForm) => {
     body: JSON.stringify(data)
   });
   if (!response.ok) throw await response.json();
-  // const payload = await response.json();
 };
 
 export const submitSignOut = async () => {
@@ -30,6 +29,7 @@ export const submitSignOut = async () => {
 };
 
 export const submitSignUpForm = async (data: ISignUpForm) => {
+  console.log({ ...data });
   const response = await fetch(`/api/user/signUp`, {
     method: `POST`,
     headers: {
@@ -38,7 +38,7 @@ export const submitSignUpForm = async (data: ISignUpForm) => {
     body: JSON.stringify(data)
   });
   if (!response.ok) throw await response.json();
-  return await response.json();
+  return;
 };
 
 export const getRegistResult = async () => {
@@ -48,14 +48,14 @@ export const getRegistResult = async () => {
   if (!response.ok) throw await response.json();
 };
 
-export const testApi = async () => {
-  const response = await fetch(`/api/test/bbb`, {
-    method: `GET`,
-    credentials: "same-origin",
-    headers: {
-      "X-AUTH-TOKEN": cookies.getAccessToken()
-    }
-  });
-  if (!response.ok) throw await response.json();
-  return await response.json();
-};
+// export const testApi = async () => {
+//   const response = await fetch(`/api/test/bbb`, {
+//     method: `GET`,
+//     credentials: "same-origin",
+//     headers: {
+//       "X-AUTH-TOKEN": cookies.getAccessToken()
+//     }
+//   });
+//   if (!response.ok) throw await response.json();
+//   return await response.json();
+// };
