@@ -51,7 +51,7 @@ public class UserController {
         return ResponseEntity.ok().body(Collections.singletonMap("response", "ok"));
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/signOut")
     public ResponseEntity<?> signOut(HttpServletResponse response) throws Exception {
         userService.signOut(response);
         return ResponseEntity.ok().body(Collections.singletonMap("response", "ok"));
