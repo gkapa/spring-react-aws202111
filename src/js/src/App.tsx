@@ -15,23 +15,46 @@ import SignIn from "pages/auth/SignIn";
 import SignUp from "pages/auth/SignUp";
 import Regist from "pages/auth/Regist";
 import NotFound from "pages/notFound/NotFound";
+import { styled } from "@mui/material/styles";
+import { createGlobalStyle } from "styled-components";
 
 export default function App() {
   return (
     <BrowserRouter>
       <CssBaseline />
+      <GlobalStyle />
       <AuthProvider>
         <Navbar />
-        <Box id="mainContent" sx={{ py: 2, mx: "auto", width: "100%", maxWidth: gb.theme.maxContentWidth }}>
+        <MainContainerBox>
           <Routes>
-            <Route path="/" element={<Home></Home>} />
+            <Route path="/" element={<Home />} />
             <Route path="/auth/signUp" element={<SignUp />} />
             <Route path="/auth/signIn" element={<SignIn />} />
             <Route path="/auth/regist" element={<Regist />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </Box>
+        </MainContainerBox>
       </AuthProvider>
     </BrowserRouter>
   );
 }
+
+const MainContainerBox = styled(Box)`
+  margin: 0px auto;
+  padding: 0px 0;
+  width: 100%;
+  max-width: ${gb.theme.maxContentWidth}px;
+`;
+
+// background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);
+
+const GlobalStyle = createGlobalStyle`
+body {
+  background: url(/background/home-background.png);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+`;

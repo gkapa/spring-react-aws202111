@@ -1,11 +1,12 @@
 import React from "react";
-import { AppBar, Toolbar, Box, Typography, Button, IconButton } from "@mui/material";
+import { AppBar, Toolbar, Box, Typography, Button, IconButton, Stack } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import * as gb from "styles/globalConsts";
 import { Link } from "react-router-dom";
 import { AuthContext } from "components/auth/Auth";
 // import * as cookies from "utils/cookies";
 import { submitSignOut } from "api/authApi";
+import { styled } from "@mui/material/styles";
 
 export default function Fun() {
   const { currentUser, setCurrentUser } = React.useContext(AuthContext);
@@ -35,10 +36,31 @@ export default function Fun() {
           <Link to="/">
             <Box component="img" sx={{ maxHeight: { xs: 28, md: 44 }, mx: 2 }} src="/navbar/logo-han.jpg" alt="logo" />
           </Link>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-
+          <ToolbarButton
+            variant="outlined"
+            color="inherit"
+            sx={{ border: "none" }}
+            onClick={() => window.open("/", "_self")}
+          >
+            ホーム
+          </ToolbarButton>
+          <ToolbarButton
+            variant="outlined"
+            color="inherit"
+            sx={{ border: "none" }}
+            onClick={() => window.open("/", "_self")}
+          >
+            技術スタック
+          </ToolbarButton>
+          <ToolbarButton
+            variant="outlined"
+            color="inherit"
+            sx={{ border: "none" }}
+            onClick={() => window.open("/", "_self")}
+          >
+            作ってみた機能
+          </ToolbarButton>
+          <Box sx={{ flexGrow: 1 }}></Box>
           {currentUser ? (
             <Button variant="contained" color="inherit" sx={{ background: "#ffe082" }} onClick={() => onClickLogout()}>
               ログアウト
@@ -55,12 +77,16 @@ export default function Fun() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{ mx: 1, display: { xs: "none", md: "flex" } }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ fontSize: 36 }} />
           </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
   );
 }
+
+const ToolbarButton = styled(Button)`
+  font-weight: 700;
+`;
