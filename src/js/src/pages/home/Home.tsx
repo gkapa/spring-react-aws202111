@@ -1,11 +1,12 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import IntroBox from "blocks/IntroBox";
 
 export default function Fun() {
   return (
     <Box>
-      <IntroduceBox>
+      <IntroCard>
         <Box>
           <IntroTypo variant="h2" sx={{ textAlign: "left", ml: 4 }}>
             HAN SAHYEON
@@ -14,14 +15,49 @@ export default function Fun() {
             WEB DEVELOPER
           </IntroTypo>
         </Box>
-      </IntroduceBox>
+      </IntroCard>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <IntroBox title="React" td="left">
+            <p>
+              redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발 경험이
+              있습니다.
+            </p>
+          </IntroBox>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <IntroBox title="React" td="right">
+            <p>
+              redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발 경험이
+              있습니다.
+            </p>
+          </IntroBox>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <IntroBox title="React" td="left">
+            <p>
+              redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발 경험이
+              있습니다.
+            </p>
+          </IntroBox>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <IntroBox title="React" td="left">
+            <p>
+              redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발 경험이
+              있습니다.
+            </p>
+          </IntroBox>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
 
-const textStroke = "lightblue";
+const textStrokeColor = "lightblue";
 
-const IntroduceBox = styled(Box)`
+const IntroCard = styled(Box)`
   height: 80vh;
   min-height: 600px;
 
@@ -38,10 +74,12 @@ const IntroduceBox = styled(Box)`
 const IntroTypo = styled(Typography)`
   color: rgba(76, 0, 0, 0.3);
   font-weight: 700;
-  text-shadow: 1px 1px 0 ${textStroke}, -1px 1px 0 ${textStroke}, 1px -1px 0 ${textStroke}, -1px -1px 0 ${textStroke},
-    0px 1px 0 ${textStroke}, 0px -1px 0 ${textStroke}, -1px 0px 0 ${textStroke}, 1px 0px 0 ${textStroke},
-    2px 2px 0 ${textStroke}, -2px 2px 0 ${textStroke}, 2px -2px 0 ${textStroke}, -2px -2px 0 ${textStroke},
-    0px 2px 0 ${textStroke}, 0px -2px 0 ${textStroke}, -2px 0px 0 ${textStroke}, 2px 0px 0 ${textStroke},
-    1px 2px 0 ${textStroke}, -1px 2px 0 ${textStroke}, 1px -2px 0 ${textStroke}, -1px -2px 0 ${textStroke},
-    2px 1px 0 ${textStroke}, -2px 1px 0 ${textStroke}, 2px -1px 0 ${textStroke}, -2px -1px 0 ${textStroke};
+  text-shadow: 1px 1px 0 ${textStrokeColor}, -1px 1px 0 ${textStrokeColor}, 1px -1px 0 ${textStrokeColor},
+    -1px -1px 0 ${textStrokeColor}, 0px 1px 0 ${textStrokeColor}, 0px -1px 0 ${textStrokeColor},
+    -1px 0px 0 ${textStrokeColor}, 1px 0px 0 ${textStrokeColor}, 2px 2px 0 ${textStrokeColor},
+    -2px 2px 0 ${textStrokeColor}, 2px -2px 0 ${textStrokeColor}, -2px -2px 0 ${textStrokeColor},
+    0px 2px 0 ${textStrokeColor}, 0px -2px 0 ${textStrokeColor}, -2px 0px 0 ${textStrokeColor},
+    2px 0px 0 ${textStrokeColor}, 1px 2px 0 ${textStrokeColor}, -1px 2px 0 ${textStrokeColor},
+    1px -2px 0 ${textStrokeColor}, -1px -2px 0 ${textStrokeColor}, 2px 1px 0 ${textStrokeColor},
+    -2px 1px 0 ${textStrokeColor}, 2px -1px 0 ${textStrokeColor}, -2px -1px 0 ${textStrokeColor};
 `;

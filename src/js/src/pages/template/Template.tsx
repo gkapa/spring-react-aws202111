@@ -9,3 +9,5 @@ export default function Fun() {
     </Box>
   );
 }
+
+// const StyledBox = styled(Box)``;

@@ -1,12 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import { CssBaseline } from "@mui/material";
+
 import "styles/globalFont.css";
 import "styles/globalStyle.css";
 
 import Navbar from "components/navbar/Navbar";
-import Box from "@mui/material/Box";
 import * as gb from "styles/globalConsts";
 
 import AuthProvider from "components/auth/Auth";
@@ -15,8 +14,9 @@ import SignIn from "pages/auth/SignIn";
 import SignUp from "pages/auth/SignUp";
 import Regist from "pages/auth/Regist";
 import NotFound from "pages/notFound/NotFound";
-import { styled } from "@mui/material/styles";
+import Skill from "pages/skill/Skill";
 import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 export default function App() {
   return (
@@ -31,6 +31,7 @@ export default function App() {
             <Route path="/auth/signUp" element={<SignUp />} />
             <Route path="/auth/signIn" element={<SignIn />} />
             <Route path="/auth/regist" element={<Regist />} />
+            <Route path="/_/skill" element={<Skill />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </MainContainerBox>
@@ -39,7 +40,7 @@ export default function App() {
   );
 }
 
-const MainContainerBox = styled(Box)`
+const MainContainerBox = styled.div`
   margin: 0px auto;
   padding: 0px 0;
   width: 100%;

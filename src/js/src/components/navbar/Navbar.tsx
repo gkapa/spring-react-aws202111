@@ -1,14 +1,15 @@
 import React from "react";
-import { AppBar, Toolbar, Box, Typography, Button, IconButton, Stack } from "@mui/material";
+import { AppBar, Toolbar, Box, Button, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import * as gb from "styles/globalConsts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "components/auth/Auth";
 // import * as cookies from "utils/cookies";
 import { submitSignOut } from "api/authApi";
 import { styled } from "@mui/material/styles";
 
 export default function Fun() {
+  const navigate = useNavigate();
   const { currentUser, setCurrentUser } = React.useContext(AuthContext);
 
   React.useEffect(() => {
@@ -27,7 +28,7 @@ export default function Fun() {
   }, [setCurrentUser]);
 
   return (
-    <Box>
+    <StyledBox>
       <AppBar
         id="navbar-appbar"
         sx={{ position: "relative", backgroundColor: "#FCFAD4", alignItems: "center", color: "black" }}
@@ -36,19 +37,14 @@ export default function Fun() {
           <Link to="/">
             <Box component="img" sx={{ maxHeight: { xs: 28, md: 44 }, mx: 2 }} src="/navbar/logo-han.jpg" alt="logo" />
           </Link>
-          <ToolbarButton
-            variant="outlined"
-            color="inherit"
-            sx={{ border: "none" }}
-            onClick={() => window.open("/", "_self")}
-          >
+          <ToolbarButton variant="outlined" color="inherit" sx={{ border: "none" }} onClick={() => navigate("/")}>
             ホーム
           </ToolbarButton>
           <ToolbarButton
             variant="outlined"
             color="inherit"
             sx={{ border: "none" }}
-            onClick={() => window.open("/", "_self")}
+            onClick={() => navigate("/_/skill")}
           >
             技術スタック
           </ToolbarButton>
@@ -83,9 +79,15 @@ export default function Fun() {
           </IconButton>
         </Toolbar>
       </AppBar>
-    </Box>
+    </StyledBox>
   );
 }
+
+const StyledBox = styled(Box)`
+  * {
+    font-family: "Noto Sans JP", "Lato" !important;
+  }
+`;
 
 const ToolbarButton = styled(Button)`
   font-weight: 700;
