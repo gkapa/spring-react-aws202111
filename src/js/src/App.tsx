@@ -41,7 +41,7 @@ export default function App() {
 }
 
 const MainContainerBox = styled.div`
-  margin: 0px auto;
+  margin: 12px auto;
   padding: 0px 0;
   width: 100%;
   max-width: ${gb.theme.maxContentWidth}px;

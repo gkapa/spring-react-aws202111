@@ -26,7 +26,7 @@ const IntroBox = styled(Box)<any>`
   width: 100%;
   border: 3px solid ${intorBoxBorderColor};
   border-radius: 32px;
-  padding: 8px 16px;
+  padding: 12px 42px;
   background: ${intorBoxBodyColor};
   color: white;
 
