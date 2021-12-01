@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ISignInForm, submitSignInForm } from "api/authApi";
 import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   email: yup.string().required("必須項目です").email("有効なメールアドレスを入力してください"),
@@ -12,6 +13,8 @@ const schema = yup.object({
 });
 
 export default function Fun() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -63,7 +66,7 @@ export default function Fun() {
           color="secondary"
           variant="contained"
           size="large"
-          onClick={() => window.open("/auth/signUp", "_self")}
+          onClick={() => navigate("/auth/signUp")}
           sx={{ background: "#DF5D4F" }}
         >
           新規登録

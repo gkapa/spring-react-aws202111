@@ -1,16 +1,16 @@
 import React from "react";
 import { Box, Stack, Link } from "@mui/material";
 import TitleBox from "blocks/TitleBox";
-import IntroBox from "blocks/IntroBox";
+import SkillIntroBox from "blocks/SkillIntroBox";
 import { styled } from "@mui/material/styles";
 import { externalLinks } from "styles/globalConsts";
 
 export default function Fun() {
   return (
     <Box sx={{ my: 4 }}>
-      <TitleBox title="技術スタック"></TitleBox>
+      <TitleBox title="技術スタック">本サイト作成、または実務で使用したスキルリストです。</TitleBox>
       <Stack spacing={4}>
-        <IntroBox title="React" td="left">
+        <SkillIntroBox title="React" td="left">
           <Box>
             Typesciprt CRAを元に、このページを作成しています。
             <br />
@@ -37,8 +37,8 @@ export default function Fun() {
             その他使用経験スキル: jquery, bootstrap
           </Box>
           <IconBox></IconBox>
-        </IntroBox>
-        <IntroBox title="Java Spring" td="right">
+        </SkillIntroBox>
+        <SkillIntroBox title="Java Spring" td="right">
           <Box>
             バックエンドはJava Springで作成しています。
             <br />
@@ -55,8 +55,8 @@ export default function Fun() {
             その他使用経験スキル: thymeleaf
           </Box>
           <IconBox></IconBox>
-        </IntroBox>
-        <IntroBox title="AWS" td="left">
+        </SkillIntroBox>
+        <SkillIntroBox title="AWS" td="left">
           <Box>
             サーバーはAWSで構築しています。
             <br />
@@ -74,8 +74,8 @@ export default function Fun() {
             <br />
           </Box>
           <IconBox></IconBox>
-        </IntroBox>
-        <IntroBox title="RDBMS" td="right">
+        </SkillIntroBox>
+        <SkillIntroBox title="RDBMS" td="right">
           <Box>
             DBはpostgresで作成しました。 <br />
             <br />
@@ -90,8 +90,8 @@ export default function Fun() {
             その他使用経験DB管理ツール: Mysql Workbench、SSMS、A5M2
           </Box>
           <IconBox></IconBox>
-        </IntroBox>
-        <IntroBox title="その他" td="left">
+        </SkillIntroBox>
+        <SkillIntroBox title="その他" td="left">
           <Box>
             開発環境: Windows
             <br />
@@ -102,7 +102,7 @@ export default function Fun() {
             社内業務管理ツール: Slack, Backlog
           </Box>
           <IconBox></IconBox>
-        </IntroBox>
+        </SkillIntroBox>
       </Stack>
     </Box>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import IntroBox from "blocks/IntroBox";
+import SkillIntroBox from "blocks/SkillIntroBox";
 
 export default function Fun() {
   return (
@@ -19,36 +19,36 @@ export default function Fun() {
 
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <IntroBox title="React" td="left">
+          <SkillIntroBox title="React" td="left">
             <p>
               redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발 경험이
               있습니다.
             </p>
-          </IntroBox>
+          </SkillIntroBox>
         </Grid>
         <Grid item xs={12} md={6}>
-          <IntroBox title="React" td="right">
+          <SkillIntroBox title="React" td="right">
             <p>
               redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발 경험이
               있습니다.
             </p>
-          </IntroBox>
+          </SkillIntroBox>
         </Grid>
         <Grid item xs={12} md={6}>
-          <IntroBox title="React" td="left">
+          <SkillIntroBox title="React" td="left">
             <p>
               redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발 경험이
               있습니다.
             </p>
-          </IntroBox>
+          </SkillIntroBox>
         </Grid>
         <Grid item xs={12} md={6}>
-          <IntroBox title="React" td="left">
+          <SkillIntroBox title="React" td="left">
             <p>
               redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발 경험이
               있습니다.
             </p>
-          </IntroBox>
+          </SkillIntroBox>
         </Grid>
       </Grid>
     </Box>

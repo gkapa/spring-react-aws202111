@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 interface IProps {
   title: string;
   // td: "left" | "right";
-  // children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export default function Fun(props: IProps) {
@@ -13,6 +13,9 @@ export default function Fun(props: IProps) {
     <TitleBox>
       <Typography variant="h2" gutterBottom sx={{ fontFamily: "Kaisei Decol" }}>
         {props.title}
+      </Typography>
+      <Typography variant="h6" gutterBottom sx={{}}>
+        {props.children}
       </Typography>
     </TitleBox>
   );

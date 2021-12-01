@@ -10,19 +10,19 @@ interface IProps {
 
 export default function Fun(props: IProps) {
   return (
-    <IntroBox td={props.td} component="fieldset">
+    <WrapperBox td={props.td} component="fieldset">
       <legend>
         <Box>{props.title}</Box>
       </legend>
       {props.children}
-    </IntroBox>
+    </WrapperBox>
   );
 }
 
 const intorBoxBorderColor = "#00ADB5";
 const intorBoxBodyColor = "#222831";
 
-const IntroBox = styled(Box)<any>`
+const WrapperBox = styled(Box)<any>`
   width: 100%;
   border: 3px solid ${intorBoxBorderColor};
   border-radius: 32px;

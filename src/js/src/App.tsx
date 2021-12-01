@@ -15,6 +15,7 @@ import SignUp from "pages/auth/SignUp";
 import Regist from "pages/auth/Regist";
 import NotFound from "pages/notFound/NotFound";
 import Skill from "pages/skill/Skill";
+import Tool from "pages/tool/Tool";
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/auth/signIn" element={<SignIn />} />
             <Route path="/auth/regist" element={<Regist />} />
             <Route path="/_/skill" element={<Skill />} />
+            <Route path="/_/tool" element={<Tool />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </MainContainerBox>

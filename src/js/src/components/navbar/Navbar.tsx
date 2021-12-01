@@ -48,12 +48,7 @@ export default function Fun() {
           >
             技術スタック
           </ToolbarButton>
-          <ToolbarButton
-            variant="outlined"
-            color="inherit"
-            sx={{ border: "none" }}
-            onClick={() => window.open("/", "_self")}
-          >
+          <ToolbarButton variant="outlined" color="inherit" sx={{ border: "none" }} onClick={() => navigate("/_/tool")}>
             作ってみた機能
           </ToolbarButton>
           <Box sx={{ flexGrow: 1 }}></Box>
