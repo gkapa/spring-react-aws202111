@@ -15,7 +15,8 @@ import SignUp from "pages/auth/SignUp";
 import Regist from "pages/auth/Regist";
 import NotFound from "pages/notFound/NotFound";
 import Skill from "pages/skill/Skill";
-import Tool from "pages/tool/Tool";
+import Implement from "pages/implement/Implement";
+import GoogleMap from "pages/implement/GoogleMap";
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 
@@ -33,7 +34,8 @@ export default function App() {
             <Route path="/auth/signIn" element={<SignIn />} />
             <Route path="/auth/regist" element={<Regist />} />
             <Route path="/_/skill" element={<Skill />} />
-            <Route path="/_/tool" element={<Tool />} />
+            <Route path="/_/impl" element={<Implement />} />
+            <Route path="/_/impl/googleMap" element={<GoogleMap />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </MainContainerBox>
@@ -44,7 +46,7 @@ export default function App() {
 
 const MainContainerBox = styled.div`
   margin: 12px auto;
-  padding: 0px 0;
+  padding: 24px 12px;
   width: 100%;
   max-width: ${gb.theme.maxContentWidth}px;
 `;

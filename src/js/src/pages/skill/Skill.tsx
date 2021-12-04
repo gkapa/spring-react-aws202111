@@ -61,7 +61,7 @@ export default function Fun() {
             サーバーはAWSで構築しています。
             <br />
             <br />
-            デプロイ: Elastic Beanstalk{" "}
+            配布: Elastic Beanstalk
             <Link href="https://www.udemy.com/course/fullstack-development-springboot/">(参考講義)</Link>
             <br />
             DB管理: RDS <Link href="https://www.udemy.com/course/fullstack-development-springboot/">(参考講義)</Link>

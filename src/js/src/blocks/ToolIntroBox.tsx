@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardActions, CardMedia, CardContent, Typography, Box, Button } from "@mui/material";
+import { Card, CardActions, CardMedia, CardContent, Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";

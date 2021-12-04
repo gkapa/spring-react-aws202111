@@ -1,15 +1,10 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Link } from "@mui/material";
 import TitleBox from "blocks/TitleBox";
 import ToolIntroBox from "blocks/ToolIntroBox";
 // import { styled } from "@mui/material/styles";
 
 export default function Fun() {
-  React.useEffect(() => {
-    console.log("...........");
-    console.log(process.env.REACT_APP_SERVICE_VERSION);
-  }, []);
-
   return (
     <Box sx={{ my: 4, mx: 2 }}>
       <TitleBox title="作ってみた機能">本サイトに実装してみた機能です。</TitleBox>
@@ -20,8 +15,9 @@ export default function Fun() {
           </ToolIntroBox>
         </Grid>
         <Grid item xs={6} md={4}>
-          <ToolIntroBox title="xx" image="/tool_intro/login.jpg" linkTo="/">
-            sdf
+          <ToolIntroBox title="Google Maps api" image="/tool_intro/login.jpg" linkTo="/_/impl/googleMap">
+            <Link href="https://react-google-maps-api-docs.netlify.app/">参考したページ(1)</Link>
+            <Link href="https://github.com/google-map-react/google-map-react/issues/1016">(2)</Link>
           </ToolIntroBox>
         </Grid>
       </Grid>
