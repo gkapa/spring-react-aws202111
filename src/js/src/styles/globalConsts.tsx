@@ -1,6 +1,10 @@
 export const theme = {
   maxNavbarWidth: 800,
-  maxContentWidth: 900
+  maxContentWidth: 900,
+  navbar: {
+    bgColor: "#FCFAD4",
+    buttonColor: "#ffe082"
+  }
 };
 
 export const externalLinks = {
