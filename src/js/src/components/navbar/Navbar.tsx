@@ -61,7 +61,7 @@ export default function Fun() {
       >
         <Toolbar id="navbar-toolbar" sx={{ width: 1, maxWidth: gb.theme.maxNavbarWidth }}>
           <RouterLink to="/">
-            <Box component="img" sx={{ maxHeight: { xs: 28, md: 44 }, mx: 2 }} src="/navbar/logo-han.jpg" alt="logo" />
+            <Box component="img" sx={{ maxHeight: { xs: 28, md: 44 }, mx: 2 }} src="/static/navbar/logo-han.jpg" alt="logo" />
           </RouterLink>
           {ToolbarButtonInfos.map((info) => {
             return (

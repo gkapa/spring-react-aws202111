@@ -58,19 +58,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //토큰 기반 인증이라 세션은 사용하지 않음
                 .and()
                 .authorizeRequests()
+                .antMatchers("/static/**", "/favicon.ico", "/index.html", "/logo192.png",
+                        "/logo512.png", "/manifest.json", "/robots.txt").permitAll()
+                .and()
+                .authorizeRequests()
+//                .antMatchers("/error").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/api/user/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
                 .antMatchers("/_/**").permitAll()
-//                .antMatchers("/api/user/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
+//                .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class); //JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣음
+
+        //                .antMatchers("/api/user/**").hasRole("ADMIN")
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.addAllowedOrigin("http://heydongdong.ewha.com.s3-website.ap-northeast-2.amazonaws.com");
 //        configuration.addAllowedOrigin("http://localhost:3000");
         configuration.setAllowedOrigins(Arrays.asList("*"));
 //        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));

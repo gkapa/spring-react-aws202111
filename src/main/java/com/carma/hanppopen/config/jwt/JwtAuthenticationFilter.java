@@ -14,6 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 //public class JwtAuthenticationFilter extends GenericFilterBean {
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -28,20 +29,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String[] jwtTokens = jwtTokenProvider.resolveToken((HttpServletRequest) request);
-        String accessToken = jwtTokens[0];
-        String refreshToken = jwtTokens[1];
-        System.out.println("accessToken: " + accessToken);
-        System.out.println("refreshToken: " + refreshToken);
-
-        if (accessToken != null && jwtTokenProvider.validateToken(accessToken)) {
-            String newAccessToken = jwtTokenProvider.reIssueAccessTokenFromRefreshToken(response, refreshToken);
-            Authentication authentication = jwtTokenProvider.getAuthentication(newAccessToken);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        } else if (refreshToken != null && jwtTokenProvider.validateToken(refreshToken)) {
-            String newAccessToken = jwtTokenProvider.reIssueAccessTokenFromRefreshToken(response, refreshToken);
-            Authentication authentication = jwtTokenProvider.getAuthentication(newAccessToken);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+//        System.out.println("Filter: httpRequest.......");
+        System.out.println(request.getRequestURI());
+        if (Pattern.matches("^/api", request.getRequestURI())) {
+            String[] jwtTokens = jwtTokenProvider.resolveToken((HttpServletRequest) request);
+            String accessToken = jwtTokens[0];
+            String refreshToken = jwtTokens[1];
+            System.out.println("accessToken: " + accessToken);
+            System.out.println("refreshToken: " + refreshToken);
+            if (accessToken != null && jwtTokenProvider.validateToken(accessToken)) {
+                String newAccessToken = jwtTokenProvider.reIssueAccessTokenFromRefreshToken(response, refreshToken);
+                Authentication authentication = jwtTokenProvider.getAuthentication(newAccessToken);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            } else if (refreshToken != null && jwtTokenProvider.validateToken(refreshToken)) {
+                String newAccessToken = jwtTokenProvider.reIssueAccessTokenFromRefreshToken(response, refreshToken);
+                Authentication authentication = jwtTokenProvider.getAuthentication(newAccessToken);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
         filterChain.doFilter(request, response);
     }

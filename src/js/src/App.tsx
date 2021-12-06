@@ -55,7 +55,7 @@ const MainContainerBox = styled.div`
 
 const GlobalStyle = createGlobalStyle`
 body {
-  background: url(/background/home-background.png);
+  background: url(/static/background/home-background.png);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

@@ -65,7 +65,7 @@ const IntroCard = styled(Box)`
   flex-direction: column;
   justify-content: center;
 
-  background: url(/background/coo-circle.png);
+  background: url(/static/background/coo-circle.png);
   background-size: 50% auto;
   background-repeat: no-repeat;
   background-position: center;

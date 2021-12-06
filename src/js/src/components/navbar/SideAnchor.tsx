@@ -1,5 +1,5 @@
 import React from "react";
-import { Drawer, Box, Button, ListItemText, ListItem, ListItemIcon } from "@mui/material";
+import { Drawer, Box, ListItemText, ListItem, ListItemIcon } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { theme } from "styles/globalConsts";
 import { AuthContext } from "components/auth/Auth";
