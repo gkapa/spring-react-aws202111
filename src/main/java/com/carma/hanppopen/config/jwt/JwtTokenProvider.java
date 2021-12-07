@@ -39,7 +39,7 @@ public class JwtTokenProvider {
     private String REFRESH_TOKEN_NAME;
 
     @Value("${app.mode}")
-    private String APPLICATION_MODE;
+    private String APP_MODE;
 
     private UserDetailsService userDetailsService;
     private TUserRepo tUserRepo;
@@ -113,14 +113,14 @@ public class JwtTokenProvider {
 
     public void setCookieToClient(HttpServletResponse response, String accessToken, String refreshToken) {
         Cookie accessCookie = new Cookie(ACCESS_TOKEN_NAME, accessToken);
-        if (APPLICATION_MODE == "prod") {
+        if (APP_MODE.equals("prod")) {
             accessCookie.setSecure(true);
         }
         accessCookie.setPath("/");
         accessCookie.setMaxAge((int)((long)ACCESS_TOKEN_VALID_TIME / 1000) + 1);
         response.addCookie(accessCookie);
         Cookie refreshCookie = new Cookie(REFRESH_TOKEN_NAME, refreshToken);
-        if (APPLICATION_MODE == "prod") {
+        if (APP_MODE.equals("prod")) {
             refreshCookie.setSecure(true);
         }
         refreshCookie.setHttpOnly(true);

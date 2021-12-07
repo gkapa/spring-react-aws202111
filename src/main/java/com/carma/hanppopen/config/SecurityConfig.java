@@ -22,12 +22,19 @@ import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private JwtTokenProvider jwtTokenProvider;
+
+    @Value("${aws.domain-home}")
+    private String DOMAIN_HOME;
+
+    @Value("${app.mode}")
+    private String APP_MODE;
 
     @Autowired
     public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
@@ -63,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 //                .antMatchers("/error").permitAll()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/error").permitAll()
                 .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/_/**").permitAll()
@@ -79,15 +86,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.addAllowedOrigin("http://localhost:3000");
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        if (APP_MODE.equals("prod")) {
+            configuration.setAllowedOrigins(Arrays.asList(DOMAIN_HOME)); // CORSリクエストを許可するドメイン
+        } else {
+            configuration.setAllowedOrigins(Arrays.asList("*"));
+//            configuration.setAllowedOrigins(Arrays.asList("localhost:5000", "localhost:3000"));
+        }
         configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
 //        configuration.setAllowedHeaders(Arrays.asList("Authorization", "content-type", "credentials", JWT_HEADER, "ref-token"));
         configuration.setExposedHeaders(Arrays.asList("*"));
 //        configuration.setExposedHeaders(Arrays.asList(JWT_HEADER, "Set-Cookie"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(true);  // CORSリクエストでcookie情報の取得を許可するか
         configuration.setMaxAge(3600L); //preflight 결과를 1시간동안 캐시에 저장
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

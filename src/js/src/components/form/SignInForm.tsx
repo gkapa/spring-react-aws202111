@@ -27,7 +27,9 @@ export default function Fun() {
     try {
       await submitSignInForm(data);
       window.open("/", "_self");
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   return (

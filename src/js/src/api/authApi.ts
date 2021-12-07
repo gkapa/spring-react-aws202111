@@ -19,6 +19,7 @@ export const submitSignInForm = async (data: ISignInForm) => {
     },
     body: JSON.stringify(data)
   });
+  console.log(response);
   if (!response.ok) throw await response.json();
 };
 
@@ -29,7 +30,6 @@ export const submitSignOut = async () => {
 };
 
 export const submitSignUpForm = async (data: ISignUpForm) => {
-  console.log({ ...data });
   const response = await fetch(`/api/user/signUp`, {
     method: `POST`,
     headers: {

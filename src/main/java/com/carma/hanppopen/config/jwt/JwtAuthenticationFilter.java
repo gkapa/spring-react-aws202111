@@ -29,7 +29,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-//        System.out.println("Filter: httpRequest.......");
         System.out.println(request.getRequestURI());
         if (Pattern.matches("^/api", request.getRequestURI())) {
             String[] jwtTokens = jwtTokenProvider.resolveToken((HttpServletRequest) request);
