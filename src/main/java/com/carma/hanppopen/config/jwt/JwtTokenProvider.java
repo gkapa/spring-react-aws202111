@@ -16,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
@@ -138,11 +139,22 @@ public class JwtTokenProvider {
         // 1. 액세스토큰은 헤더로 받아온다
         // 2. 리프레시토큰은 httponly 쿠키로 받아온다
         String accessToken = request.getHeader(JWT_HEADER);
-        String refreshToken = Arrays.stream(request.getCookies())
+        String refreshToken = null;
+
+        if (request.getCookies() != null) {
+//            Map<String, String> cookieMap = Arrays.stream(request.getCookies())
+//                    .collect(Collectors.toMap(Cookie::getName, Cookie::getValue));
+//            System.out.println(cookieMap.toString());
+//            refreshToken = cookieMap.getOrDefault(REFRESH_TOKEN_NAME, null);
+
+            refreshToken = Arrays.stream(request.getCookies())
                 .filter(c -> c.getName().equals(REFRESH_TOKEN_NAME))
                 .findFirst()
                 .map(Cookie::getValue)
                 .orElse(null);
+        }
+
+
         return new String[]{accessToken, refreshToken};
     }
 
