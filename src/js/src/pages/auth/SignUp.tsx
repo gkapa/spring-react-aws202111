@@ -2,6 +2,8 @@ import React from "react";
 import SignUpForm from "components/form/SignUpForm";
 import { Stack, Box, Typography } from "@mui/material";
 import SignUpCompletedCard from "components/card/SignUpCompleteCard";
+import { Helmet } from "react-helmet-async";
+import { app } from "styles/globalConsts";
 
 interface ISignUpContext {
   isSignUpCompleted: boolean;
@@ -23,20 +25,25 @@ export default function Fun() {
   }, [isSignUpCompleted]);
 
   return (
-    <SignUpContext.Provider value={{ isSignUpCompleted, setIsSignUpCompleted }}>
-      <Box>
-        {isSignUpCompleted ? (
-          <SignUpCompletedCard></SignUpCompletedCard>
-        ) : (
-          <Stack spacing={3}>
-            <Typography variant="h4" component="div" color="primary" sx={{ ml: 12 }}>
-              新規会員登録
-            </Typography>
-            <hr style={{ background: "#1976D2", marginBottom: "36px" }}></hr>
-            <SignUpForm></SignUpForm>
-          </Stack>
-        )}
-      </Box>
-    </SignUpContext.Provider>
+    <>
+      <Helmet>
+        <title>新規会員登録{app.title}</title>
+      </Helmet>
+      <SignUpContext.Provider value={{ isSignUpCompleted, setIsSignUpCompleted }}>
+        <Box>
+          {isSignUpCompleted ? (
+            <SignUpCompletedCard></SignUpCompletedCard>
+          ) : (
+            <Stack spacing={3}>
+              <Typography variant="h4" component="div" color="primary" sx={{ ml: 12 }}>
+                新規会員登録
+              </Typography>
+              <hr style={{ background: "#1976D2", marginBottom: "36px" }}></hr>
+              <SignUpForm></SignUpForm>
+            </Stack>
+          )}
+        </Box>
+      </SignUpContext.Provider>
+    </>
   );
 }

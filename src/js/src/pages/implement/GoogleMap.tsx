@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Button, Typography } from "@mui/material";
+import { Box, Grid, Button, Typography, Link } from "@mui/material";
 import ImplGoogleMap from "components/googleMap/ImplGoogleMapWrapper";
 import SkillIntroBox from "blocks/SkillIntroBox";
 
@@ -46,7 +46,12 @@ export default function Fun() {
     >
       <WrapperBox>
         <SkillIntroBox title="Google Maps Api" td="left">
-          マップで二つの点を設定すると、距離を表示するよう機能です。
+          <Box>
+            マップで二つの点を設定すると、距離を表示するよう機能です。
+            <br />
+            <Link href="https://react-google-maps-api-docs.netlify.app/">参考したページ(1)</Link>
+            <Link href="https://github.com/google-map-react/google-map-react/issues/1016">(2)</Link>
+          </Box>
         </SkillIntroBox>
         <Grid container spacing={2} sx={{ mt: 2 }}>
           <Grid item xs={12} md={4} sx={{ alignItems: "center", justifyContent: "center", display: "flex" }}>

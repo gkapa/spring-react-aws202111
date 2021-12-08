@@ -7,6 +7,10 @@ export const theme = {
   }
 };
 
+export const app = {
+  title: "　|　Han Sahyeon."
+};
+
 export const externalLinks = {
   github: `https://github.com/gkapa/spring-react-aws202111`
 };

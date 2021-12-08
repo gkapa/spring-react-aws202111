@@ -7,7 +7,8 @@ export default function Fun() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY ?? "default",
-    libraries: ["geometry"]
+    libraries: ["geometry"],
+    language: "ja"
   });
 
   React.useEffect(() => {}, []);
