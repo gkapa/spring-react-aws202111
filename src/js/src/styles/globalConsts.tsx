@@ -1,6 +1,9 @@
 export const theme = {
-  maxNavbarWidth: 800,
-  maxContentWidth: 900,
+  layout: {
+    maxNavbarWidthPx: 800,
+    maxContentWidthPx: 900,
+    minContentHeightVh: 90
+  },
   navbar: {
     bgColor: "#FCFAD4",
     buttonColor: "#ffe082"

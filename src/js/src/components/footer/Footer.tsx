@@ -1,22 +1,28 @@
 import React from "react";
 import styled from "styled-components";
+import { Box, Link, Stack } from "@mui/material";
+import { theme, externalLinks } from "styles/globalConsts";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
-interface IProps {
-  showModal: () => void;
+export default function fun() {
+  return (
+    <WrapperBox>
+      <Stack spacing={2} direction="row">
+        <Box>©2021 Han Sahyeon.</Box>
+        <Box>
+          <Link href={externalLinks.github} target="_blank" sx={{ color: "black" }}>
+            <GitHubIcon />
+          </Link>
+        </Box>
+      </Stack>
+    </WrapperBox>
+  );
 }
 
-export default function fun(props: IProps) {
-  return <Wrapper>sdf</Wrapper>;
-}
-
-const Wrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(240, 240, 240, 0.9);
-  padding: 50px 0;
+const WrapperBox = styled(Box)`
+  background: ${theme.navbar.bgColor};
+  padding: 40px 0;
   display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: center;
 `;

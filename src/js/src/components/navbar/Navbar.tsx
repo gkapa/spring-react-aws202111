@@ -59,9 +59,14 @@ export default function Fun() {
         id="navbar-appbar"
         sx={{ position: "relative", backgroundColor: theme.navbar.bgColor, alignItems: "center", color: "black" }}
       >
-        <Toolbar id="navbar-toolbar" sx={{ width: 1, maxWidth: gb.theme.maxNavbarWidth }}>
+        <Toolbar id="navbar-toolbar" sx={{ width: 1, maxWidth: gb.theme.layout.maxNavbarWidthPx }}>
           <RouterLink to="/">
-            <Box component="img" sx={{ maxHeight: { xs: 28, md: 44 }, mx: 2 }} src="/static/navbar/logo-han.jpg" alt="logo" />
+            <Box
+              component="img"
+              sx={{ maxHeight: { xs: 28, md: 44 }, mx: 2 }}
+              src="/static/navbar/logo-han.jpg"
+              alt="logo"
+            />
           </RouterLink>
           {ToolbarButtonInfos.map((info) => {
             return (
@@ -75,14 +80,18 @@ export default function Fun() {
             <Button
               variant="contained"
               color="inherit"
-              sx={{ background: theme.navbar.buttonColor }}
+              sx={{ background: theme.navbar.buttonColor, display: { xs: "none", md: "flex" } }}
               onClick={() => onClickLogout()}
             >
               ログアウト
             </Button>
           ) : (
             <RouterLink to="/auth/signIn">
-              <Button variant="contained" color="inherit" sx={{ background: theme.navbar.buttonColor }}>
+              <Button
+                variant="contained"
+                color="inherit"
+                sx={{ background: theme.navbar.buttonColor, display: { xs: "none", md: "flex" } }}
+              >
                 ログイン
               </Button>
             </RouterLink>
@@ -92,7 +101,7 @@ export default function Fun() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mx: 1, display: { xs: "none", md: "flex" } }}
+            sx={{ mx: 1 }}
             onClick={() => setIsSidebarOn(true)}
           >
             <MenuIcon sx={{ fontSize: 36 }} />

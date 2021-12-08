@@ -6,6 +6,7 @@ import "styles/globalFont.css";
 import "styles/globalStyle.css";
 
 import Navbar from "components/navbar/Navbar";
+import Footer from "components/footer/Footer";
 import * as gb from "styles/globalConsts";
 
 import AuthProvider from "components/auth/Auth";
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </MainContainerBox>
+        <Footer />
       </AuthProvider>
     </BrowserRouter>
   );
@@ -48,7 +50,8 @@ const MainContainerBox = styled.div`
   margin: 12px auto;
   padding: 24px 12px;
   width: 100%;
-  max-width: ${gb.theme.maxContentWidth}px;
+  max-width: ${gb.theme.layout.maxContentWidthPx}px;
+  min-height: ${gb.theme.layout.minContentHeightVh}vh;
 `;
 
 // background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);

@@ -21,8 +21,13 @@ export default function Fun() {
               Typesciprt CRAを元に、このページを作成しています。
               <br />
               大本のコードの作成方法は、
-              <Link href="https://www.udemy.com/course/fullstack-development-springboot/">udemy講義</Link>、
-              <Link href="https://github.com/gkapa/nextjspp">過去に弄ってみたページ</Link>
+              <Link href="https://www.udemy.com/course/fullstack-development-springboot/" target="_blank">
+                udemy講義
+              </Link>
+              、
+              <Link href="https://github.com/gkapa/nextjspp" target="_blank">
+                過去に弄ってみたページ
+              </Link>
               を参考に作成しました。
               <br />
               <br />
@@ -35,10 +40,17 @@ export default function Fun() {
               CSSスタイル: SCSS (styled-components)
               <br />
               状態管理: useContext
-              <Link href="https://qiita.com/akifumiyoshimu/items/88fb13959a2184174473">(参考したページ(1))</Link>
-              <Link href="https://qiita.com/mtitg/items/3f1b6e61cee2f01f04a8">(2)</Link>
+              <Link href="https://qiita.com/akifumiyoshimu/items/88fb13959a2184174473" target="_blank">
+                (参考したページ(1))
+              </Link>
+              <Link href="https://qiita.com/mtitg/items/3f1b6e61cee2f01f04a8" target="_blank">
+                (2)
+              </Link>
               <br />
-              フォーム作成: yep <Link href="https://dev.classmethod.jp/articles/mui-v5-rhf-v7/">(参考したページ)</Link>
+              フォーム作成: yep{" "}
+              <Link href="https://dev.classmethod.jp/articles/mui-v5-rhf-v7/" target="_blank">
+                (参考したページ)
+              </Link>
               <br />
               その他使用経験スキル: jquery, bootstrap
             </Box>
@@ -54,9 +66,15 @@ export default function Fun() {
               Java バージョン: 11 <br />
               DBアクセス: JPA <br />
               ログイン管理: Spring Security + JWT{" "}
-              <Link href="https://returnbliss.tistory.com/15">(参考したページ(1))</Link>
-              <Link href="https://soon-devblog.tistory.com/9">(2)</Link>
-              <Link href="https://myunji.tistory.com/466">(3)</Link>
+              <Link href="https://returnbliss.tistory.com/15" target="_blank">
+                (参考したページ(1))
+              </Link>
+              <Link href="https://soon-devblog.tistory.com/9" target="_blank">
+                (2)
+              </Link>
+              <Link href="https://myunji.tistory.com/466" target="_blank">
+                (3)
+              </Link>
               <br />
               その他使用経験スキル: thymeleaf
             </Box>
@@ -68,13 +86,23 @@ export default function Fun() {
               <br />
               <br />
               配布: Elastic Beanstalk
-              <Link href="https://www.udemy.com/course/fullstack-development-springboot/">(参考講義)</Link>
+              <Link href="https://www.udemy.com/course/fullstack-development-springboot/" target="_blank">
+                (参考講義)
+              </Link>
               <br />
-              DB管理: RDS <Link href="https://www.udemy.com/course/fullstack-development-springboot/">(参考講義)</Link>
+              DB管理: RDS{" "}
+              <Link href="https://www.udemy.com/course/fullstack-development-springboot/" target="_blank">
+                (参考講義)
+              </Link>
               <br />
               メール転送(Spring連動): SES
-              <Link href="https://www.youtube.com/watch?v=IsGLDE7i6tg">(参考したページ(1))</Link>
-              <Link href="https://www.tutorialsbuddy.com/send-email-using-amazon-ses-in-java-spring-boot-example">
+              <Link href="https://www.youtube.com/watch?v=IsGLDE7i6tg" target="_blank">
+                (参考したページ(1))
+              </Link>
+              <Link
+                href="https://www.tutorialsbuddy.com/send-email-using-amazon-ses-in-java-spring-boot-example"
+                target="_blank"
+              >
                 (2)
               </Link>
               <br />
