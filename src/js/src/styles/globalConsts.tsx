@@ -2,7 +2,8 @@ export const theme = {
   layout: {
     maxNavbarWidthPx: 800,
     maxContentWidthPx: 900,
-    minContentHeightVh: 90
+    minContentHeightVh: 90,
+    pageMarginTopPx: 24
   },
   navbar: {
     bgColor: "#FCFAD4",

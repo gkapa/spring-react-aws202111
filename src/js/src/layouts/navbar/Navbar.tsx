@@ -2,7 +2,7 @@ import React from "react";
 import { AppBar, Toolbar, Box, Button, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import * as gb from "styles/globalConsts";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { AuthContext } from "components/auth/Auth";
 // import * as cookies from "utils/cookies";
 import { submitSignOut } from "api/authApi";
@@ -25,20 +25,37 @@ const ToolbarButton = styled(Button)`
   color: inherit;
 `;
 
-export const ToolbarButtonInfos: { link: string; tx: string; icon: string }[] = [
-  { link: "/", tx: "ホーム", icon: "home" },
-  { link: "/_/skill", tx: "技術スタック", icon: "skill" },
-  { link: "/_/impl", tx: "作ってみた機能", icon: "impl" }
+export const ToolbarButtonInfos: { id: string; link: string; tx: string; icon: string }[] = [
+  { id: "navHomeBtn", link: "/", tx: "ホーム", icon: "home" },
+  { id: "navSkillBtn", link: "/_/skill", tx: "技術スタック", icon: "skill" },
+  { id: "navImplBtn", link: "/_/impl", tx: "作ってみた機能", icon: "impl" }
 ];
 
 export default function Fun() {
   const { currentUser, setCurrentUser } = React.useContext(AuthContext);
   const [isSidebarOn, setIsSidebarOn] = React.useState(false);
 
+  const location = useLocation();
+
   React.useEffect(() => {
-    // console.log(`current: ` + currentUser?.email);
-    // console.log(cookies.getCookie("accessToken"));
-  }, []);
+    for (const info of ToolbarButtonInfos) {
+      document.querySelector(`#${info.id}`)?.classList.remove("navBtnEffect");
+    }
+
+    if (location.pathname === "/") {
+      for (const info of ToolbarButtonInfos) {
+        if (info.link === "/") {
+          document.querySelector(`#${info.id}`)?.classList.add("navBtnEffect");
+        }
+      }
+    } else if (/^\/_\/.+/.test(location.pathname)) {
+      for (const info of ToolbarButtonInfos) {
+        if (info.link !== "/" && new RegExp(`^${info.link}.*`).test(location.pathname)) {
+          document.querySelector(`#${info.id}`)?.classList.add("navBtnEffect");
+        }
+      }
+    }
+  }, [location]);
 
   const onClickLogout = React.useCallback(async () => {
     try {
@@ -71,7 +88,9 @@ export default function Fun() {
           {ToolbarButtonInfos.map((info) => {
             return (
               <RouterLink to={info.link} key={info.tx}>
-                <ToolbarButton variant="text">{info.tx}</ToolbarButton>
+                <ToolbarButton id={info.id} variant="text">
+                  {info.tx}
+                </ToolbarButton>
               </RouterLink>
             );
           })}
@@ -115,5 +134,28 @@ export default function Fun() {
 const StyledBox = styled(Box)`
   * {
     font-family: "Noto Sans JP", "Lato" !important;
+  }
+
+  button.navBtnEffect {
+    &:before {
+      content: "";
+      position: absolute;
+      display: block;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+
+      background: #bfcadc;
+      border-radius: 60% 25% 90% 24%;
+      transform: rotate(6deg);
+      opacity: 0.5;
+
+      animation: navbarButtonAnime 1s ease 0.2s infinite alternate;
+      @keyframes navbarButtonAnime {
+        to {
+          opacity: 0.8;
+        }
+      }
+    }
   }
 `;

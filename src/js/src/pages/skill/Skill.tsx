@@ -3,7 +3,6 @@ import { Box, Stack, Link } from "@mui/material";
 import TitleBox from "blocks/TitleBox";
 import SkillIntroBox from "blocks/SkillIntroBox";
 import { styled } from "@mui/material/styles";
-import { externalLinks } from "styles/globalConsts";
 import { Helmet } from "react-helmet-async";
 import { app } from "styles/globalConsts";
 
@@ -13,7 +12,7 @@ export default function Fun() {
       <Helmet>
         <title>技術スタック{app.title}</title>
       </Helmet>
-      <Box sx={{ my: 4 }}>
+      <Box sx={{ my: 4, mx: 2 }}>
         <TitleBox title="技術スタック">本サイト作成、または実務で使用したスキルリストです。</TitleBox>
         <Stack spacing={4}>
           <SkillIntroBox title="React" td="left">
@@ -47,12 +46,12 @@ export default function Fun() {
                 (2)
               </Link>
               <br />
-              フォーム作成: yep{" "}
+              フォーム作成: yep
               <Link href="https://dev.classmethod.jp/articles/mui-v5-rhf-v7/" target="_blank">
                 (参考したページ)
               </Link>
               <br />
-              その他使用経験スキル: jquery, bootstrap
+              その他使用経験スキル: redux, jquery, bootstrap
             </Box>
             <IconBox></IconBox>
           </SkillIntroBox>
@@ -61,7 +60,7 @@ export default function Fun() {
               バックエンドはJava Springで作成しています。
               <br />
               <br />
-              フレームワーク: IntelliJ IDEA CE(このページ), Eclipse(開発業務)
+              フレームワーク: IntelliJ IDEA CE, Eclipse
               <br />
               Java バージョン: 11 <br />
               DBアクセス: JPA <br />
@@ -76,7 +75,7 @@ export default function Fun() {
                 (3)
               </Link>
               <br />
-              その他使用経験スキル: thymeleaf
+              その他使用経験スキル: thymeleaf, doma
             </Box>
             <IconBox></IconBox>
           </SkillIntroBox>
@@ -90,7 +89,7 @@ export default function Fun() {
                 (参考講義)
               </Link>
               <br />
-              DB管理: RDS{" "}
+              DB管理: RDS
               <Link href="https://www.udemy.com/course/fullstack-development-springboot/" target="_blank">
                 (参考講義)
               </Link>
@@ -115,7 +114,7 @@ export default function Fun() {
               <br />
               本番: AWS RDS
               <br />
-              ローカル: dockerのコンテナ
+              ローカル: dockerコンテナ
               <br />
               DB管理ツール: DBeaver CE
               <br />
@@ -129,11 +128,11 @@ export default function Fun() {
             <Box>
               開発環境: Windows
               <br />
-              使用経験言語：JavaScript、TypeScript、Java、C++、Python、バッチスクリプト
+              使用経験言語：JavaScript, TypeScript, Java, C++, Python, バッチスクリプト, その他スクリプト言語
               <br />
               プロジェクト管理: Git, Bitbucket
               <br />
-              社内業務管理ツール: Slack, Backlog
+              社内業務管理ツール: Slack, Backlog, Docbase
             </Box>
             <IconBox></IconBox>
           </SkillIntroBox>

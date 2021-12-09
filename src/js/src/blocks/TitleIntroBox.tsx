@@ -4,13 +4,12 @@ import { styled } from "@mui/material/styles";
 
 interface IProps {
   title: string;
-  td: "left" | "right";
   children: React.ReactNode;
 }
 
 export default function Fun(props: IProps) {
   return (
-    <WrapperBox td={props.td} component="fieldset">
+    <WrapperBox td={props} component="fieldset">
       <legend>
         <Box>{props.title}</Box>
       </legend>
@@ -26,7 +25,6 @@ const WrapperBox = styled(Box)<any>`
   width: 100%;
   border: 3px solid ${intorBoxBorderColor};
   border-radius: 32px;
-  margin: 4px 0px;
   padding: 12px 42px;
   background: ${intorBoxBodyColor};
   color: white;

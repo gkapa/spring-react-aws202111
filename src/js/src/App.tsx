@@ -5,9 +5,8 @@ import { CssBaseline } from "@mui/material";
 import "styles/globalFont.css";
 import "styles/globalStyle.css";
 
-import Navbar from "components/navbar/Navbar";
-import Footer from "components/footer/Footer";
-import * as gb from "styles/globalConsts";
+import Navbar from "layouts/navbar/Navbar";
+import Footer from "layouts/footer/Footer";
 
 import AuthProvider from "components/auth/Auth";
 import Home from "pages/home/Home";
@@ -19,7 +18,7 @@ import Skill from "pages/skill/Skill";
 import Implement from "pages/implement/Implement";
 import GoogleMap from "pages/implement/GoogleMap";
 import { createGlobalStyle } from "styled-components";
-import styled from "styled-components";
+import MainContainerBox from "layouts/main/MainContainerBox";
 
 export default function App() {
   return (
@@ -45,14 +44,6 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-const MainContainerBox = styled.div`
-  margin: 12px auto;
-  padding: 24px 12px;
-  width: 100%;
-  max-width: ${gb.theme.layout.maxContentWidthPx}px;
-  min-height: ${gb.theme.layout.minContentHeightVh}vh;
-`;
 
 // background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);
 

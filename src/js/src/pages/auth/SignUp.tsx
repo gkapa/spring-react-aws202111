@@ -4,6 +4,8 @@ import { Stack, Box, Typography } from "@mui/material";
 import SignUpCompletedCard from "components/card/SignUpCompleteCard";
 import { Helmet } from "react-helmet-async";
 import { app } from "styles/globalConsts";
+import { styled } from "@mui/material/styles";
+import { theme } from "styles/globalConsts";
 
 interface ISignUpContext {
   isSignUpCompleted: boolean;
@@ -30,7 +32,7 @@ export default function Fun() {
         <title>新規会員登録{app.title}</title>
       </Helmet>
       <SignUpContext.Provider value={{ isSignUpCompleted, setIsSignUpCompleted }}>
-        <Box>
+        <WrapperBox>
           {isSignUpCompleted ? (
             <SignUpCompletedCard></SignUpCompletedCard>
           ) : (
@@ -42,8 +44,12 @@ export default function Fun() {
               <SignUpForm></SignUpForm>
             </Stack>
           )}
-        </Box>
+        </WrapperBox>
       </SignUpContext.Provider>
     </>
   );
 }
+
+const WrapperBox = styled(Box)`
+  margin-top: ${theme.layout.pageMarginTopPx}px;
+`;

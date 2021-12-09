@@ -1,14 +1,14 @@
 import React from "react";
 import { Box } from "@mui/material";
-// import { styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 // import { Link as RouterLink } from "react-router-dom";
 
 export default function Fun() {
   return (
-    <Box>
+    <WrapperBox>
       <h1>Hello, Wolrd!</h1>
-    </Box>
+    </WrapperBox>
   );
 }
 
-// const StyledBox = styled(Box)``;
+const WrapperBox = styled(Box)``;
