@@ -16,7 +16,6 @@ import Implement from "pages/implement/Implement";
 import GoogleMap from "pages/implement/GoogleMap";
 import { createGlobalStyle } from "styled-components";
 import MainContainerBox from "layouts/main/MainContainerBox";
-import styled from "styled-components";
 
 import "styles/globalFont.css";
 import "styles/globalStyle.css";
