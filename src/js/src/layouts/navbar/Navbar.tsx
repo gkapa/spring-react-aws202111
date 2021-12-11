@@ -1,10 +1,8 @@
 import React from "react";
-import { AppBar, Toolbar, Box, Button, IconButton } from "@mui/material";
+import { AppBar, Toolbar, Box, Button, IconButton, Avatar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import * as gb from "styles/globalConsts";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { AuthContext } from "components/auth/Auth";
-// import * as cookies from "utils/cookies";
 import { submitSignOut } from "api/authApi";
 import { styled } from "@mui/material/styles";
 import SideAnchor from "./SideAnchor";
@@ -76,7 +74,7 @@ export default function Fun() {
         id="navbar-appbar"
         sx={{ position: "relative", backgroundColor: theme.navbar.bgColor, alignItems: "center", color: "black" }}
       >
-        <Toolbar id="navbar-toolbar" sx={{ width: 1, maxWidth: gb.theme.layout.maxNavbarWidthPx }}>
+        <Toolbar id="navbar-toolbar" sx={{ width: 1, maxWidth: theme.layout.maxNavbarWidthPx }}>
           <RouterLink to="/">
             <Box
               component="img"
@@ -123,7 +121,11 @@ export default function Fun() {
             sx={{ mx: 1 }}
             onClick={() => setIsSidebarOn(true)}
           >
-            <MenuIcon sx={{ fontSize: 36 }} />
+            {currentUser ? (
+              <Avatar sx={{ background: "purple" }}>{currentUser.username.replace(/^(.{2}).*/, "$1")}</Avatar>
+            ) : (
+              <MenuIcon sx={{ fontSize: 36 }} />
+            )}
           </IconButton>
         </Toolbar>
       </AppBar>

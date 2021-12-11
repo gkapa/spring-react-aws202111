@@ -34,46 +34,48 @@ export default function Fun() {
 
   return (
     <Box sx={{ my: 3 }}>
-      <Stack spacing={3} sx={{ width: "80%", mx: "auto" }}>
-        <TextField
-          required
-          label="メールアドレス"
-          type="email"
-          {...register("email")}
-          error={"email" in errors}
-          helperText={errors.email?.message}
-        />
-        <TextField
-          required
-          label="パスワード"
-          type="password"
-          {...register("password")}
-          error={"password" in errors}
-          helperText={errors.password?.message}
-        />
-        <Button type="submit" color="primary" variant="contained" size="large" onClick={handleSubmit(onSubmit)}>
-          ログイン
-        </Button>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <hr style={{ background: "#1976D2", flexGrow: 1 }}></hr>
+      <form onSubmit={() => handleSubmit(onSubmit)}>
+        <Stack spacing={3} sx={{ width: "80%", mx: "auto" }}>
+          <TextField
+            required
+            label="メールアドレス"
+            type="email"
+            {...register("email")}
+            error={"email" in errors}
+            helperText={errors.email?.message}
+          />
+          <TextField
+            required
+            label="パスワード"
+            type="password"
+            {...register("password")}
+            error={"password" in errors}
+            helperText={errors.password?.message}
+          />
+          <Button type="submit" color="primary" variant="contained" size="large" onClick={handleSubmit(onSubmit)}>
+            ログイン
+          </Button>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <hr style={{ background: "#1976D2", flexGrow: 1 }}></hr>
 
-          <Typography sx={{ mx: 2 }}>
-            <ArrowCircleDownIcon sx={{ verticalAlign: "middle", mr: 1 }} />
-            はじめてのご利用の方
-          </Typography>
-          <hr style={{ background: "#1976D2", flexGrow: 1 }}></hr>
-        </Box>
-        <Button
-          type="submit"
-          color="secondary"
-          variant="contained"
-          size="large"
-          onClick={() => navigate("/auth/signUp")}
-          sx={{ background: "#DF5D4F" }}
-        >
-          新規登録
-        </Button>
-      </Stack>
+            <Typography sx={{ mx: 2 }}>
+              <ArrowCircleDownIcon sx={{ verticalAlign: "middle", mr: 1 }} />
+              はじめてのご利用の方
+            </Typography>
+            <hr style={{ background: "#1976D2", flexGrow: 1 }}></hr>
+          </Box>
+          <Button
+            type="submit"
+            color="secondary"
+            variant="contained"
+            size="large"
+            onClick={() => navigate("/auth/signUp")}
+            sx={{ background: "#DF5D4F" }}
+          >
+            新規登録
+          </Button>
+        </Stack>
+      </form>
     </Box>
   );
 }

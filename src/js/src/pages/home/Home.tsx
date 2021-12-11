@@ -27,39 +27,33 @@ export default function Fun() {
             </IntroTypo>
           </Box>
         </IntroCard>
-        <Box sx={{ mx: 2, py: 4 }} id="homeIntroWrapperBox">
+        <Box sx={{ mx: 2, py: 8 }} id="homeIntroWrapperBox">
           <HomeIntroBgBox id="homeIntroBgBox" sx={{}} />
+          <Box sx={{ my: 4 }}>
+            <Typography variant="h6" sx={{ color: "white" }}>
+              ウェブ開発者のハンです。こちらのページでは、私の技術スタックを活用し、作成可能な物を紹介しております。
+              また、このサイトは、以下の構成で作成されています。
+            </Typography>
+          </Box>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <SkillIntroBox title="React" td="left">
-                <p>
-                  redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발
-                  경험이 있습니다.
-                </p>
+                <p>フロントエンドは、Typescript + Reactで作成されています。</p>
               </SkillIntroBox>
             </Grid>
             <Grid item xs={12} md={6}>
-              <SkillIntroBox title="React" td="right">
-                <p>
-                  redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발
-                  경험이 있습니다.
-                </p>
+              <SkillIntroBox title="Spring" td="right">
+                <p>バックエンド部分は、Java Springで作成しました。</p>
               </SkillIntroBox>
             </Grid>
             <Grid item xs={12} md={6}>
-              <SkillIntroBox title="React" td="left">
-                <p>
-                  redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발
-                  경험이 있습니다.
-                </p>
+              <SkillIntroBox title="AWS" td="left">
+                <p>インフラは、AWSを使い配布しています。</p>
               </SkillIntroBox>
             </Grid>
             <Grid item xs={12} md={6}>
-              <SkillIntroBox title="React" td="left">
-                <p>
-                  redux, redux saga, recoil 등의 상태관리 라이브러리 사용 경험이 있습니다. next.js를 활용한 SSR 개발
-                  경험이 있습니다.
-                </p>
+              <SkillIntroBox title="Others" td="right">
+                <p>上記を含めたその他詳しい情報は、こちらをご参照ください。</p>
               </SkillIntroBox>
             </Grid>
           </Grid>
@@ -103,6 +97,6 @@ const HomeIntroBgBox = styled(Box)`
   max-width: 100%;
   left: 50%;
   height: 100px;
-  transform: translate(-50%, -16px);
+  transform: translate(-50%, -64px);
   background: black;
 `;

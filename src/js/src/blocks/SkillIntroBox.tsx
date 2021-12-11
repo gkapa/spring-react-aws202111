@@ -24,6 +24,7 @@ const intorBoxBodyColor = "#222831";
 
 const WrapperBox = styled(Box)<any>`
   width: 100%;
+  height: 100%;
   border: 3px solid ${intorBoxBorderColor};
   border-radius: 32px;
   margin: 4px 0px;

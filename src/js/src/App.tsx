@@ -2,9 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 
-import "styles/globalFont.css";
-import "styles/globalStyle.css";
-
 import Navbar from "layouts/navbar/Navbar";
 import Footer from "layouts/footer/Footer";
 
@@ -19,6 +16,10 @@ import Implement from "pages/implement/Implement";
 import GoogleMap from "pages/implement/GoogleMap";
 import { createGlobalStyle } from "styled-components";
 import MainContainerBox from "layouts/main/MainContainerBox";
+import styled from "styled-components";
+
+import "styles/globalFont.css";
+import "styles/globalStyle.css";
 
 export default function App() {
   return (

@@ -52,4 +52,9 @@ export default function Fun() {
 
 const WrapperBox = styled(Box)`
   margin-top: ${theme.layout.pageMarginTopPx}px;
+  padding: 24px 12px;
+
+  background: white;
+  border: 2px solid gray;
+  border-radius: 42px;
 `;

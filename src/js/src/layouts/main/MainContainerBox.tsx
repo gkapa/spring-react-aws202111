@@ -16,4 +16,8 @@ const Wrapper = styled.div`
   padding: 0px 0px;
   max-width: ${theme.layout.maxContentWidthPx}px;
   min-height: ${theme.layout.minContentHeightVh}vh;
+
+  * {
+    font-family: "Noto Sans JP", "Lato";
+  }
 `;

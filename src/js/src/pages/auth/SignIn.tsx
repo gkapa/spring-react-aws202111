@@ -14,9 +14,16 @@ export default function Fun() {
       </Helmet>
       <WrapperBox>
         <Stack spacing={3}>
-          <Typography variant="h4" component="div" color="primary" sx={{ ml: 12 }}>
-            ログイン
-          </Typography>
+          <div>
+            <Typography variant="h4" color="primary" sx={{ ml: 12 }}>
+              ログイン
+            </Typography>
+          </div>
+          <div>
+            <Typography variant="h6" sx={{ ml: 12, color: "Red" }}>
+              *Access tokenは10秒、Refresh tokenは40秒で設定しています。
+            </Typography>
+          </div>
           <hr style={{ background: "#1976D2", marginBottom: "36px" }}></hr>
           <SignInForm></SignInForm>
         </Stack>
@@ -27,4 +34,9 @@ export default function Fun() {
 
 const WrapperBox = styled(Box)`
   margin-top: ${theme.layout.pageMarginTopPx}px;
+  padding: 24px 12px;
+
+  background: white;
+  border: 2px solid gray;
+  border-radius: 42px;
 `;

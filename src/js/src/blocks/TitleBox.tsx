@@ -11,7 +11,7 @@ interface IProps {
 export default function Fun(props: IProps) {
   return (
     <TitleBox>
-      <Typography variant="h2" gutterBottom sx={{ fontFamily: "Kaisei Decol" }}>
+      <Typography variant="h2" gutterBottom sx={{ fontFamily: "Kaisei Decol !important" }}>
         {props.title}
       </Typography>
       <Typography variant="h6" gutterBottom sx={{}}>
@@ -22,7 +22,6 @@ export default function Fun(props: IProps) {
 }
 
 const TitleBox = styled(Box)`
-  // display: inline-block;
   padding: 8px;
   margin: 8px 0;
   margin-left: 16px;
