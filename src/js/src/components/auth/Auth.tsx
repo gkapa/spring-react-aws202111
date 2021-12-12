@@ -32,7 +32,7 @@ export default function Fun(props: any) {
 
   React.useEffect(() => {
     initUser();
-  }, [location.pathname]);
+  }, [location.pathname, initUser]);
 
   return <AuthContext.Provider value={{ currentUser, setCurrentUser }}>{props.children}</AuthContext.Provider>;
 }

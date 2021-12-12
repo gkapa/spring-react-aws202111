@@ -16,32 +16,35 @@ import Implement from "pages/implement/Implement";
 import GoogleMap from "pages/implement/GoogleMap";
 import { createGlobalStyle } from "styled-components";
 import MainContainerBox from "layouts/main/MainContainerBox";
+import { HelmetProvider } from "react-helmet-async";
 
 import "styles/globalFont.css";
 import "styles/globalStyle.css";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <CssBaseline />
-      <GlobalStyle />
-      <AuthProvider>
-        <Navbar />
-        <MainContainerBox>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth/signUp" element={<SignUp />} />
-            <Route path="/auth/signIn" element={<SignIn />} />
-            <Route path="/auth/regist" element={<Regist />} />
-            <Route path="/_/skill" element={<Skill />} />
-            <Route path="/_/impl" element={<Implement />} />
-            <Route path="/_/impl/googleMap" element={<GoogleMap />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </MainContainerBox>
-        <Footer />
-      </AuthProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <CssBaseline />
+        <GlobalStyle />
+        <AuthProvider>
+          <Navbar />
+          <MainContainerBox>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/auth/signUp" element={<SignUp />} />
+              <Route path="/auth/signIn" element={<SignIn />} />
+              <Route path="/auth/regist" element={<Regist />} />
+              <Route path="/_/skill" element={<Skill />} />
+              <Route path="/_/impl" element={<Implement />} />
+              <Route path="/_/impl/googleMap" element={<GoogleMap />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </MainContainerBox>
+          <Footer />
+        </AuthProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
