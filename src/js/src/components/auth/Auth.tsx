@@ -1,5 +1,6 @@
 import React from "react";
 import * as cookies from "utils/cookies";
+import { useLocation } from "react-router";
 
 export interface ICurrentUser {
   email: string;
@@ -17,6 +18,7 @@ export const AuthContext = React.createContext<IAuthContext>({
 });
 
 export default function Fun(props: any) {
+  const location = useLocation();
   const [currentUser, setCurrentUser] = React.useState<ICurrentUser | null | undefined>(undefined);
 
   const initUser = React.useCallback(async () => {
@@ -30,7 +32,7 @@ export default function Fun(props: any) {
 
   React.useEffect(() => {
     initUser();
-  }, [initUser]);
+  }, [location.pathname]);
 
   return <AuthContext.Provider value={{ currentUser, setCurrentUser }}>{props.children}</AuthContext.Provider>;
 }
