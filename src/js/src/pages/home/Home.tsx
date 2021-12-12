@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid, Link } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import SkillIntroBox from "blocks/SkillIntroBox";
 import { Helmet } from "react-helmet-async";
@@ -53,7 +53,9 @@ export default function Fun() {
             </Grid>
             <Grid item xs={12} md={6}>
               <SkillIntroBox title="Others" td="right">
-                <p>上記を含めたその他詳しい情報は、こちらをご参照ください。</p>
+                <p>
+                  上記を含めたその他詳しい情報は、<Link href="/_/skill">こちら</Link>をご参照ください。
+                </p>
               </SkillIntroBox>
             </Grid>
           </Grid>

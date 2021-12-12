@@ -36,7 +36,7 @@ export default function Fun() {
               <br />
               CSSライブラリ: mui (material-ui)
               <br />
-              CSSスタイル: SCSS (styled-components)
+              CSSスタイル: styled-components (CSS in JS)
               <br />
               状態管理: useContext
               <Link href="https://qiita.com/akifumiyoshimu/items/88fb13959a2184174473" target="_blank">

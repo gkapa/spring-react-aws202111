@@ -51,7 +51,7 @@ https://create-react-app.dev/docs/adding-typescript/
 
 * ライブラリ、状態管理  
 CSSライブラリ: mui(旧material-ui) https://mui.com/getting-started/usage/  
-CSSスタイル: styled-components (SCSS)  
+CSSスタイル: styled-components (CSS in JS)  
 状態管理: useContext  
 フォーム作成: yup https://www.npmjs.com/package/yup https://dev.classmethod.jp/articles/mui-v5-rhf-v7/  
 cookie管理: react-cookie  
@@ -100,6 +100,9 @@ Postgres 12.8
 live: AWS RDS  
 local: Docker  
 DB接続ツール: DBeaver
+
+* ERD  
+![erd](https://user-images.githubusercontent.com/44703302/145714810-b008bbaf-6627-4faa-8bd0-1d3829ea7395.jpg)
 
 ---
 
