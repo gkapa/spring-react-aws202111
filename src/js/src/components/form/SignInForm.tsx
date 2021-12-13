@@ -18,6 +18,7 @@ export default function Fun() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm<ISignInForm>({
     resolver: yupResolver(schema)
@@ -27,8 +28,24 @@ export default function Fun() {
     try {
       await submitSignInForm(data);
       window.open("/", "_self");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.errorCode) {
+        switch (error.errorCode) {
+          case "U101":
+            setError("email", { type: "manual", message: error.message });
+            break;
+          case "U111":
+            setError("password", { type: "manual", message: error.message });
+            break;
+          default:
+            console.error("unknown error code");
+        }
+      } else {
+        (Object.keys(data) as (keyof typeof data)[]).forEach((key) => {
+          if (!error[key]) return;
+          setError(key, { type: "manual", message: error[key] });
+        });
+      }
     }
   }, []);
 

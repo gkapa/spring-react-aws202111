@@ -20,15 +20,13 @@ public class AwsConfiguration {
     @Value("${aws.region}")
     private String awsRegion;
 
-    public AWSStaticCredentialsProvider awsCredentials() {
-        BasicAWSCredentials credentials =
-                new BasicAWSCredentials(awsAccessKey, awsSecretKey);
-        return new AWSStaticCredentialsProvider(credentials);
-    }
-
     @Bean
     public AmazonSimpleEmailService getAmazonSimpleEmailService() {
-        return AmazonSimpleEmailServiceClientBuilder.standard().withCredentials(awsCredentials())
-                .withRegion(awsRegion).build();
+        BasicAWSCredentials basicAWSCredentials = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
+        AWSStaticCredentialsProvider awsStaticCredentialsProvider = new AWSStaticCredentialsProvider(basicAWSCredentials);
+
+        return AmazonSimpleEmailServiceClientBuilder.standard().withCredentials(awsStaticCredentialsProvider)
+                .withRegion(awsRegion)
+                .build();
     }
 }

@@ -185,9 +185,17 @@ Hosted zones から ドメイン設定
 => また、Spring SecurityのsetAllowedOriginsを設定しないと、CORSを解決できない。
 ```
 
+SES
+```
+*** 注意事項
+ドメインを登録しても、Account dashboardに表示されている状態が sandboxの状態では、外部メールアドレスにメールを送信できない。
+sandbox => productに変更する場合は、別途AWSに申請フォームを作成する必要があり、8~12時間を目安に処理時間が必要になる。(平日のみ対応)
+```
+
 #### google maps api  
 ```
 TBD
 
 *** 配布を公開する時のキーは、必ずアクセス権を公開先urlに制限すること。
+
 ```

@@ -19,9 +19,17 @@ public class MailService {
     @Value("${aws.domain-email}")
     private String domainEmail;
 
+    @Value("${aws.domain-home}")
+    private String domainHome;
+
+    @Value("${app.mode}")
+    private String appMode;
+
     public void sendSignUpEmail(String emailSubject, String receiver, String email, String registKey) {
 
-        String link = "http://localhost:3000/auth/regist?key=" + registKey + "%26email=" + email + "%26";
+        String domain = appMode.equals("prod") ? domainHome : "http://localhost:3000";
+
+        String link = domain + "/auth/regist?key=" + registKey + "%26email=" + email + "%26";
 
         String emailContent = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -54,7 +62,7 @@ public class MailService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ApiRequestException(ExceptionEnum.SIGN_EMAIL_NOT_EXIST);
+            throw new ApiRequestException(ExceptionEnum.SIGNUP_EMAIL_NOT_EXIST);
         }
     }
 }

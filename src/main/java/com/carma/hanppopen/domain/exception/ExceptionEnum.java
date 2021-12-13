@@ -14,8 +14,11 @@ public enum ExceptionEnum {
 
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "I0001", "internal server error"),
 
-    SIGN_EMAIL_ALREADY_EXIST(HttpStatus.CONFLICT, "U001", "既に存在しているメールアドレスです。"),
-    SIGN_EMAIL_NOT_EXIST(HttpStatus.CONFLICT, "U002", "存在しないメールアドレスです。"),
+    SIGNUP_EMAIL_ALREADY_EXIST(HttpStatus.CONFLICT, "U001", "既に存在しているメールアドレスです。"),
+    SIGNUP_EMAIL_NOT_EXIST(HttpStatus.BAD_REQUEST, "U002", "存在しないメールアドレスです。"),
+    SIGNIN_EMAIL_NOT_EXIST(HttpStatus.BAD_REQUEST, "U101", "登録されていないメールアドレスです。"),
+    SIGNIN_PASSWORD_NOT_MATCH(HttpStatus.BAD_REQUEST, "U111", "パスワードが一致しません。入力したパスワードをご確認ください。"),
+
 
     SECURITY_01(HttpStatus.UNAUTHORIZED, "S0001", "권한이 없습니다."),
 

@@ -43,7 +43,7 @@ public class UserService {
     public void signUp(UserDtos.SignUpReqDto data) {
         Optional<TUser> mUser = tUserRepo.findByEmail(data.getEmail());
         mUser.ifPresent(x -> {
-            throw new ApiRequestException(ExceptionEnum.SIGN_EMAIL_ALREADY_EXIST);
+            throw new ApiRequestException(ExceptionEnum.SIGNUP_EMAIL_ALREADY_EXIST);
         });
         String registKey = UUID.randomUUID().toString();
         TUser newUser = TUser.builder()
@@ -62,17 +62,12 @@ public class UserService {
 
     public void signIn(HttpServletResponse response, UserDtos.SignInReqDto data) {
         TUser tUser = tUserRepo.findByEmail(data.getEmail())
-                .orElseThrow(() -> new ApiRequestException("存在しないメールアドレスです。"));
+                .orElseThrow(() -> new ApiRequestException(ExceptionEnum.SIGNIN_EMAIL_NOT_EXIST));
         if (!passwordEncoder.matches(data.getPassword(), tUser.getPassword())) {
-            throw new ApiRequestException("パスワードが一致しません。入力したパスワードをご確認ください。");
+            throw new ApiRequestException(ExceptionEnum.SIGNIN_PASSWORD_NOT_MATCH);
         }
         String[] jwtTokens = createJwtTokens(tUser);
         jwtTokenProvider.setCookieToClient(response, jwtTokens[0], jwtTokens[1]);
-//        JwtDtos.JwtDto dto = JwtDtos.JwtDto.builder()
-//                .userId(mUser.getUserId())
-//                .accessToken(jwtTokens[0])
-//                .refreshToken(jwtTokens[1])
-//                .build();
 
     }
 
